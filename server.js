@@ -15,9 +15,10 @@ var db = {
 var DB = mongo.Db(db.name, new mongo.Server(db.host, db.port, {}), {});
 
 DB.open(function(err, db) {
-	var object = {name: "testing"};
-	db.items.save(object);
-	
+	console.log("db opened");
+	db.close(function(err, db) {
+		console.log("db closed");
+	});
 });
 
 
