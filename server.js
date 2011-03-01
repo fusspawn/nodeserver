@@ -13,13 +13,7 @@ var db = {
 
 
 var DB = mongo.Db(db.name, new mongo.Server(db.host, db.port, {}), {});
-
-DB.open(function(err, db) {
-	console.log("db opened");
-	db.close(function(err, db) {
-		console.log("db closed");
-	});
-});
+console.log(DB);
 
 
 
