@@ -1,5 +1,5 @@
 var http = require('http');
-var mongo = require("mongodb")
+var mongo = require("./lib/mongodb");
 var db = new mongo.MongoDB();
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
