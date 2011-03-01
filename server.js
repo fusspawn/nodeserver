@@ -2,7 +2,7 @@ var http = require('http');
 var mongo = require("mongodb");
 var orm = require("mongoose");
 var parseURL = require("url").parse;
-var components = parseUrl(process.env['DUOSTACK_DB_MONGODB']);
+var components = parseURL(process.env['DUOSTACK_DB_MONGODB']);
 var db = {
   host: components.hostname,
   port: parseInt(components.port),
