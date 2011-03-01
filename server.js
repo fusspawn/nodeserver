@@ -1,12 +1,13 @@
 var http = require('http');
-var mongo = require("persistance");
+var orm = require("mongoose");
 
-var db = new mongo.MongoDB();
+
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Hello World from Duostack! - Fusspawn Style \n');
   console.log("served default page at: "+ new Date());
+  console.log("mongoose data: "+ JSON.stringify(orm));
   
-}).listen(8124);
+}).listen(80);
 
 console.log('Server running at http://127.0.0.1:8124/');
