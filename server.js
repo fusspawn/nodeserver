@@ -25,10 +25,11 @@ http.createServer(function (req, res) {
   
   model.find({}, function(err, docs) {
 	 docs.forEach(function(doc) {
-              sys.puts(sys.inspect(doc));
-	 })
+              res.write(doc.path + " on" + doc.date);
+	 });
+	 
+	 res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
   });
-  res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
 }).listen(80);
 
 console.log('Server running at http://127.0.0.1:8124/');
