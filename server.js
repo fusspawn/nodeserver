@@ -34,8 +34,9 @@ app.get('/', function(req, res){
   });
 });
 
-app.get("/test", function(req, res) {
+app.get("/test/", function(req, res) {
 	res.write("test");
+	res.end("end");
 });
 
 app.listen(80);
