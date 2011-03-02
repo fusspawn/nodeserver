@@ -7,7 +7,7 @@ var mongoose = require('mongoose/').Mongoose,
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
-  console.log("served default page at: "+ new Date());, 
+  console.log("served default page at: "+ new Date()); 
   var db_item = new Model({path: "/", date: new Date()});
   db_item.save();
   
