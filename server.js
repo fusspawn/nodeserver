@@ -19,9 +19,8 @@ http.createServer(function (req, res) {
   item.path = "/";
   item.date = new Date();
   item.save(function(err) {
-	res.puts(err);
+	console.log(err);
   });  
-  
   res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
 }).listen(80);
 
