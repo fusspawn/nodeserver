@@ -22,9 +22,9 @@ http.createServer(function (req, res) {
 	console.log(err);
   });  
   
-  item.find({}, function(err, docs) {
+  model.find({}, function(err, docs) {
 	 docs.forEach(function(doc) {
-		res.write(doc.path + " | " + doc.date);
+              sys.puts(sys.inspect(doc));
 	 })
   });
   res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
