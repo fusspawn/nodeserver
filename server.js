@@ -4,7 +4,7 @@ var mongoose = require('mongoose/').Mongoose,
 	db_uri = process.env['DUOSTACK_DB_MONGODB'],
     db = new mongoose(),
 	db_conn = db.connect(db_uri);
-    Model = mongoose.noSchema('test', db); // collection name
+    Model = db_conn.noSchema('test', db_conn); // collection name
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
