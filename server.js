@@ -23,9 +23,10 @@ http.createServer(function (req, res) {
 	console.log(err);
   });  
   
+  res.write("<html><body><ul>");
   model.find({}, function(err, docs) {
 	 docs.forEach(function(doc) {
-              res.write(doc.path + " on" + doc.date);
+              res.write("<li>"+doc.path + " on" + doc.date+"</li>");
 	 });
 	 
 	 res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
