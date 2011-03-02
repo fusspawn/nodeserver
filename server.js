@@ -1,8 +1,9 @@
 var http = require('http');
 var mongo = require("mongodb");
-
 var mongoose = require('mongoose/').Mongoose,
-    db = mongoose.createConnection(process.env['DUOSTACK_DB_MONGODB']),      
+	db_uri = process.env['DUOSTACK_DB_MONGODB'],
+    db = new mongoose(),
+	db_conn = db.connect(db_uri);
     Model = mongoose.noSchema('test', db); // collection name
 
 http.createServer(function (req, res) {
