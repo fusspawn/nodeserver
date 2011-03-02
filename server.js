@@ -1,53 +1,46 @@
-var sys = require("sys");
-var http = require('http');
-var express = require("express");
-var mongo = require("mongodb");
 
-var mongoose = require('mongoose'),
-	db_uri = process.env['DUOSTACK_DB_MONGODB'];
-	mongoose.connect(db_uri);
-	
-var Schema = mongoose.Schema,
-	ObjectId = Schema.ObjectId;
-	
-var TestSchema = new Schema({path: String, date: Date});
-	mongoose.model("test", TestSchema);
-	
-var app = express.createServer();
+/**
+ * Module dependencies.
+ */
+
+var express = require('express');
+
+var app = module.exports = express.createServer();
+
+// Configuration
+
+app.configure(function(){
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.bodyDecoder());
+  app.use(express.methodOverride());
+  app.use(express.cookieDecoder());
+  app.use(express.session({ secret: 'your secret here' }));
+  app.use(app.router);
+  app.use(express.staticProvider(__dirname + '/public'));
+});
+
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler()); 
+});
+
+// Routes
+
 app.get('/', function(req, res){
-  console.log("served default page at: "+ new Date()); 
-  var model = mongoose.model("test");
-  var item = new model();
-  item.path = "/";
-  item.date = new Date();
-  item.save(function(err) {
-	console.log(err);
-  });  
-  
-  res.write("<html><body><ul>");
-  model.find({}, function(err, docs) {
-	 docs.forEach(function(doc) {
-              res.write("<li>"+doc.path + " on" + doc.date+"</li>");
-	 });
-	 res.end('</ul></body></html>');
+  res.render('index', {
+    locals: {
+      title: 'Express'
+    }
   });
 });
 
-app.get("/test/", function(req, res) {
-	res.write("test");
-	res.end("end");
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	
-	var model = mongoose.model("test");
-	var item = new model();
-	item.path = "/";
-	item.date = new Date();
-	
-	item.save(function(err) {
-		console.log(err);
-	});  
-});
+// Only listen on $ node app.js
 
-app.listen(80);
-
-console.log('Server running at http://testing.duostack.net:80/');
+if (!module.parent) {
+  app.listen(3000);
+  console.log("Express server listening on port %d", app.address().port)
+}
