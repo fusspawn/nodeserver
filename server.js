@@ -13,7 +13,7 @@ var TestSchema = new Schema({path: String, date: Date});
 	
 	
 http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.writeHead(200, {'Content-Type': 'text/html'});
   console.log("served default page at: "+ new Date()); 
   var model = mongoose.model("test");
   var item = new model();
@@ -29,7 +29,7 @@ http.createServer(function (req, res) {
               res.write("<li>"+doc.path + " on" + doc.date+"</li>");
 	 });
 	 
-	 res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
+	 res.end('</ul></body></html>');
   });
 }).listen(80);
 
