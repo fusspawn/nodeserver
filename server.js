@@ -21,6 +21,12 @@ http.createServer(function (req, res) {
   item.save(function(err) {
 	console.log(err);
   });  
+  
+  item.find({}, function(err, docs) {
+	 docs.forEach(function(doc) {
+		res.write(doc.path + " | " + doc.date);
+	 })
+  });
   res.end('Hello World from Duostack! - Fusspawn Style - This request was logged to mongodb \n');
 }).listen(80);
 
