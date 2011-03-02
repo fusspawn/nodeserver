@@ -34,6 +34,10 @@ app.get('/', function(req, res){
   });
 });
 
+app.get("/test", function(req, res) {
+	res.write("test");
+});
+
 app.listen(80);
 
 console.log('Server running at http://testing.duostack.net:80/');
