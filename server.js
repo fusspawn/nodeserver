@@ -25,20 +25,11 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
-// Routes
-app.get('/', function(req, res){
-  res.render('index', {
-    locals: {
-      title: 'Express'
-    }
-  });
-});
 
 // Only listen on $ node app.js
 app.listen(80);
 var socket = io.listen(app);
 console.log("Express server listening on port %d", app.address().port)
-console.log("Socket server running on port %d", app.address().port)
 //
 socket.on("connection", function(client) {
 	  // new client is here! 
@@ -52,7 +43,6 @@ socket.on("connection", function(client) {
 		  console.log(msg); 
 		  socket.broadcast(message);
 	  });
-	  
 	  client.on('disconnect', function(){ console.log("client_dced"); }) 
 });
 
