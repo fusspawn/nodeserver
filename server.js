@@ -2,7 +2,8 @@
  * Module dependencies.
  */
 var express = require('express');
-var app = module.exports = express.createServer();
+var app = express.createServer();
+var io =  require('socket.io');
 
 // Configuration
 app.configure(function(){
@@ -37,5 +38,8 @@ app.get('/', function(req, res){
 // Only listen on $ node app.js
 if (!module.parent) {
   app.listen(3000);
+  io.listen(app);
   console.log("Express server listening on port %d", app.address().port)
 }
+
+
