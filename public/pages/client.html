@@ -14,16 +14,16 @@
 <script type="text/javascript">
 	$(function() {
 		var socket = new WebSocket("ws://testing.duostack.net:80");
-		socket.onopen(function() {
+		socket.onopen = function() {
 			console.log("socket opened");
-		});
+		};
 		
-		socket.onmessage(function (msg) {
+		socket.onmessage = function (msg) {
 			console.log(msg.data);
-		});
+		};
 		
-		socket.onclose(function () {
+		socket.onclose = function () {
 			console.log("socket closed");
-		});
+		};
 	});
  </script>
