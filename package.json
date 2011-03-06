@@ -7,8 +7,6 @@
   },
   "dependencies": {
     "express": "*",
-	"mongodb": "*",
-	"mongoose": "*",
 	"jade": "*",
 	"socket.io": "*"
   }

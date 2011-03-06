@@ -15,7 +15,6 @@ app.configure(function(){
   app.use(express.session({ secret: 'gtfomysession' }));
   app.use(app.router);
   app.use(express.staticProvider(__dirname + '/public'));
-  app.use(express.staticProvider(__dirname + '/static'));
 });
 
 app.configure('development', function(){
