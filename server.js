@@ -40,7 +40,7 @@ app.listen(80);
 var socket = io.listen(app);
 console.log("Express server listening on port %d", app.address().port)
 console.log("Socket server running on port %d", app.address().port)
-
+//
 socket.on("connection", function(client) {
 	  // new client is here! 
 	  console.log("client_conn");
