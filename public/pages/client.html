@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script src="../socket.io/socket.io.js"></script>
 	</head>
 	<body>
 		<div id="content">
@@ -12,18 +13,9 @@
 </html>
 
 <script type="text/javascript">
-	$(function() {
-		var socket = new WebSocket("ws://testing.duostack.net:80");
-		socket.onopen = function() {
-			console.log("socket opened");
-		};
-		
-		socket.onmessage = function (msg) {
-			console.log(msg.data);
-		};
-		
-		socket.onclose = function () {
-			console.log("socket closed");
-		};
-	});
+    var socket = new io.Socket();
+    socket.connect();
+    socket.on('connect', function(){ … })
+    socket.on('message', function(){ … })
+    socket.on('disconnect', function(){ … })
  </script>
