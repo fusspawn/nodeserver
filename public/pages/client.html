@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="content">
+			Testing.. 
+		</div>
+		<div id="logger">
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+	$(function() {
+		var socket = new WebSocket("ws://testing.duostack.net:80");
+		socket.onopen(function() {
+			console.log("socket opened");
+		});
+		
+		socket.onmessage(function (msg) {
+			console.log(msg.data);
+		});
+		
+		socket.onclose(function () {
+			console.log("socket closed");
+		});
+	});
+ </script>
