@@ -35,18 +35,17 @@ app.get('/', function(req, res){
   });
 });
 
-io.on("connection", function(client) {
+// Only listen on $ node app.js
+app.listen(80);
+var socket = io.listen(app);
+console.log("Express server listening on port %d", app.address().port)
+
+socket.on("connection", function(client) {
 	  // new client is here! 
 	  console.log("client_conn");
 	  client.on('message', function(message){  console.log("message: "+message.data); }) 
 	  client.on('disconnect', function(){ console.log("client_dced"); }) 
 })
 
-// Only listen on $ node app.js
-if (!module.parent) {
-  app.listen(3000);
-  io.listen(app);
-  console.log("Express server listening on port %d", app.address().port)
-}
-
+console.log("Socket Server Running..");
 
