@@ -35,6 +35,13 @@ app.get('/', function(req, res){
   });
 });
 
+io.on("connection", function(client) {
+	  // new client is here! 
+	  console.log("client_conn");
+	  client.on('message', function(message){  console.log("message: "+message.data); }) 
+	  client.on('disconnect', function(){ console.log("client_dced"); }) 
+})
+
 // Only listen on $ node app.js
 if (!module.parent) {
   app.listen(3000);
