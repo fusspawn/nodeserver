@@ -12,7 +12,8 @@
     "express": "*",
 	"mongodb": "*",
 	"mongoose": "*",
-	"jade": "*"
+	"jade": "*",
+	"socket.io": "*",
   }
   
 }
