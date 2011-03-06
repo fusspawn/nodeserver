@@ -4,7 +4,7 @@
 var express = require('express');
 var app = express.createServer();
 var io =  require('socket.io');
-
+var sys = require("sys");
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -39,13 +39,21 @@ app.get('/', function(req, res){
 app.listen(80);
 var socket = io.listen(app);
 console.log("Express server listening on port %d", app.address().port)
+console.log("Socket server running on port %d", app.address().port)
 
 socket.on("connection", function(client) {
 	  // new client is here! 
 	  console.log("client_conn");
-	  client.on('message', function(message){  console.log("message: "+message.data); }) 
+	  client.on('message', function(message){ 
+		  var msg = "undefined";
+		  var data = JSON.parse(message);
+		  if(data.message) 
+			msg = data.message;
+		 
+		  data.message = client.endpointAddr + data.message;
+		  console.log(msg); 
+		  socket.broadcast(message);
+	  }) 
 	  client.on('disconnect', function(){ console.log("client_dced"); }) 
-})
-
-console.log("Socket Server Running..");
+});
 
