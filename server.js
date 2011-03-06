@@ -50,10 +50,10 @@ socket.on("connection", function(client) {
 		  if(data.message) 
 			msg = data.message;
 		 
-		  data.message = client.endpointAddr + data.message;
 		  console.log(msg); 
 		  socket.broadcast(message);
-	  }) 
+	  });
+	  
 	  client.on('disconnect', function(){ console.log("client_dced"); }) 
 });
 
