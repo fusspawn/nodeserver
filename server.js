@@ -25,6 +25,14 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+// Routes
+app.get('/', function(req, res){
+  res.render('index', {
+    locals: {
+      title: 'Express'
+    }
+  });
+});
 
 // Only listen on $ node app.js
 app.listen(80);
