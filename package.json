@@ -11,5 +11,5 @@
 	"mongoose": "*",
 	"jade": "*",
 	"socket.io": "*"
-   }
+  }
 }
