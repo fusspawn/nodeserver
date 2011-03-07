@@ -10,7 +10,6 @@
 	"mongodb": "*",
 	"mongoose": "*",
 	"jade": "*",
-	"socket.io": "*",
-	"qs": "*"
+	"socket.io": "*"
   }
 } 
