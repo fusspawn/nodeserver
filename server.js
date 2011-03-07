@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-var express = require('express');
+var express = require('tfe-express');
 var app = express.createServer();
 var io =  require('socket.io');
 var sys = require("sys");
