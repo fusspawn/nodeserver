@@ -10,6 +10,6 @@
 	"mongoose": "*",
 	"jade": "*",
 	"socket.io": "*",
-	"qs": "*"
+	"tfe-express": "1.0.7-1"
   }
 } 
