@@ -6,7 +6,7 @@ var app = express.createServer();
 var io =  require('socket.io'); //
 var sys = require("sys");
 
-var mongoose = require("mongooose");
+var mongoose = require("mongoose");
 var duodb = process.env['DUOSTACK_DB_MONGODB'];
 var localhost = "mongodb://localhost/test";
 
