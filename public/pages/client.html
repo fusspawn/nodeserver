@@ -30,7 +30,7 @@
 			console.log("sent message");
 		});
 
-		var socket = new io.Socket("testing.duostack.net");
+		var socket = new io.Socket("testing.duostack.net:9980");
 		socket.connect();
 		socket.on('connect', function(){ console.log("connected");
 			var packet = {}

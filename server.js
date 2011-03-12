@@ -5,6 +5,15 @@ var express = require('tfe-express');
 var app = express.createServer();
 var io =  require('socket.io'); //
 var sys = require("sys");
+
+var mongoose = require("mongooose");
+var duodb = process.env['DUOSTACK_DB_MONGODB'];
+var localhost = "mongodb://localhost/test";
+
+
+
+
+
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
