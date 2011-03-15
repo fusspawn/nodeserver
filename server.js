@@ -61,6 +61,14 @@ app.get('/', function(req, res){
   });
 });
 
+app.get("/ships", function(req,res) {
+	res.render("index", {
+		locals: {
+			title: "Spaceships."
+		}
+	});
+});
+
 
 app.listen(80);
 var socket = io.listen(app);
