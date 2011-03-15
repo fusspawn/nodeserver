@@ -64,6 +64,7 @@ app.get('/', function(req, res){
 app.get("/ships", function(req,res) {
 	console.log("doing ships request");
 	get_count(function(ships) {
+		
 		var count = ships.length;	
 		console.log("there were: "+count);
 		res.render("index", {
@@ -88,6 +89,7 @@ mongoose.model("SpaceShipImage", SpaceShipImage);
 
 function get_ships(callback) {
 	var model = mongoose.model("SpaceShipImage");
+	console.log("got mongoose model");
 	model.find({}, function(err, data) {
 				if(!err)
 					callback(data);
