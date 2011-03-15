@@ -23,10 +23,13 @@ void setup() {
 }
 
 void next() {
-     if(need_new) {
+     if(need_new && !firstrun) {
 		save_robot(ship.seed, ship.colorseed);
 		need_new = false;
      }
+	 
+ firstrun = false;
+
   background(0);
   ship.setSeed(random(999999));
   ship.generate();
