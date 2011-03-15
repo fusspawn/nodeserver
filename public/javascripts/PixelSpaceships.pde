@@ -63,7 +63,7 @@ class PixelSpaceship {
     xmargin = ymargin = 0;
   }
   void recolor() { // ::added to aid coloring
-    colorseed = random(255);
+    colorseed = random(999999);
   }
   int getHeight() {
     return rows*yscale + ymargin*2;
