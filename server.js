@@ -114,7 +114,7 @@ function on_robot(packet, client) {
 	 ship.seed = packet.genseed;
 	 ship.imagedata = packet.payload;
 	 ship.save();
-	 ship.drawn_by = client.sessionId;
+	 packet.drawn_by = client.sessionId;
 	 console.log("saved Spaceship to db");
 }
 
