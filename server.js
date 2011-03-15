@@ -63,8 +63,7 @@ app.get('/', function(req, res){
 
 app.get("/ships", function(req,res) {
 	console.log("doing ships request");
-	get_count(function(ships) {
-		
+	get_ships(function(ships) {
 		var count = ships.length;	
 		console.log("there were: "+count);
 		res.render("index", {
