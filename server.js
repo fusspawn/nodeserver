@@ -72,8 +72,8 @@ socket.on("connection", function(client) {
 	 connected_players.push(new Player(client));
 	 
 	 var pack = {};
-	 packet.type="set_id";
-	 packet.sessid=client.sessionId;
+	 pack.type="set_id";
+	 pack.sessid=client.sessionId;
 	 client.send(pack);
 	 
 	 client.on('message', function(message){ 
