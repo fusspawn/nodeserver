@@ -16,6 +16,11 @@ void setup() {
   frameRate(30);
   ship = new PixelSpaceship();
   ship.setScales(4,4);
+  
+  background(0);
+  ship.setSeed(random(999999));
+  ship.generate();
+  ship.recolor();
   next();
 }
 
