@@ -132,7 +132,7 @@
 		
 		$(function() {
 			var known_loaded_ships = Array();
-			var on_screen = 30;
+			var on_screen = 61;
 			
 			function draw() {
 			var can = $("#renderall")[0];
@@ -148,7 +148,7 @@
 				if(space_ships.length > 0)
 					known_loaded_ships.push(space_ships.shift());
 				
-				if(known_loaded_ships.length > 30)
+				if(known_loaded_ships.length > 60)
 					known_loaded_ships.shift();
 					
 				if(num_on_screen() < on_screen) {
