@@ -21,16 +21,15 @@ void setup() {
   ship.setSeed(random(999999));
   ship.generate();
   ship.recolor();
-  next();
 }
 
 void next() {
-     if(need_new && !firstrun) {
-		save_robot(ship.seed, ship.colorseed);
+   if(need_new && !firstrun) {
+	    save_robot(ship.seed, ship.colorseed);
 		need_new = false;
-     }
+   }
 	 
- firstrun = false;
+  firstrun = false;
 
   background(0);
   ship.setSeed(random(999999));
@@ -38,11 +37,10 @@ void next() {
   ship.recolor();
 }
 
-void draw() {
+void draw() {		
+	ship.draw(0,0);
 	if(need_new)
 		next();
-		
-	ship.draw(0,0);
 }
 
   
