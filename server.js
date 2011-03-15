@@ -65,7 +65,7 @@ app.get("/ships", function(req,res) {
 	get_count(function(ships) {
 		console.log("rendering result");
 		var count = 0;
-		foreach(var ship in ships) {
+		foreach(ship in ships) {
 			count++;
 		}
 		
