@@ -4,10 +4,6 @@
 // for Processing 0115 beta
 // (updated for 0119 Beta)
 // Modified by fusspawn (ariochofmelnibone@gmail.com) for gamecontent generation and processing.js use
-// *just testing git commit*
-/**
-Click mouse to advance early to next pattern<br>
-*/
 
 PixelSpaceshipFitter fitter;
 PixelSpaceship ship;
