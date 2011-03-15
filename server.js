@@ -72,6 +72,8 @@ app.get("/ships", function(req,res) {
 				count: count,
 			}
 		});
+		
+		console.log("render done");
 	});
 });
 
