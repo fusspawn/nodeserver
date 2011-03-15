@@ -13,7 +13,7 @@ PixelSpaceship ship;
 miniMT rng; // want a slightly more robust rng for 32 significant bits
 int currentSeed = 0;
 boolean needsaving = false;
-
+boolean firstrun = true;
 void setup() {
   size(24, 24);
   frameRate(30);
@@ -23,10 +23,12 @@ void setup() {
 }
 
 void next() {
-     if(need_new) {
+     if(need_new && !firstrun) {
 		save_robot(ship.seed, ship.colorseed);
 		need_new = false;
      }
+	 
+	 firstrun = false;
 
   background(0);
   ship.setSeed(random(999999));
