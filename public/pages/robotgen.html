@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+		<script src="../socket.io/socket.io.js"></script>
+		<script src="../javascripts/processing-1.1.0.js"></script>
+		<style type="text/css">
+			.window {
+				z-index: 10;
+				position: absolute;
+				left: 10px;
+				top: 315px;
+				width: 70%;
+				color: lime;
+				background-color: #010;
+				opacity: .80;
+				border: 2px solid black;
+				font-family: "Lucida Console", "Monaco", "Courier New", Courier, mono;
+				font-size: small;
+				height: 135px;
+			}
+		</style>
+	</head>
+	<body>
+	<canvas id="genpanel" data-processing-sources="../javascripts/PixelSpaceships.pde"></canvas>  </body>
+</html>
+<script type="text/javascript">
+			robotserverokay = false;
+			socket = new io.Socket("testing.duostack.net");
+			socket.connect();
+			need_new = true;
+			
+			socket.on('connect', function(){
+				 robotserverokay = true;
+			});
+			
+			socket.on('message', function(message){ 
+					console.log(message);
+					if(message.type=="new_robot") {
+						setTimeout(function() {
+							need_new = true;
+						}, 1000);
+					}
+			});	
+			
+		function save_robot(genseed, color) {
+				    var packet = {};
+					packet.type = "robot_rendered";
+					packet.payload = $("#genpanel")[0].toDataURL();
+					packet.color = color;
+					packet.genseed = genseed;
+					socket.send(JSON.stringify(packet));			
+		}
+</script>

@@ -84,7 +84,7 @@ function trace(msg) {
 			trace("sent message");
 		});
 
-		socket = new io.Socket("testing.duostack.net");
+		socket = new io.Socket("localhost");
 		socket.connect();
 		socket.on('connect', function(){
     		trace("connected");
@@ -157,10 +157,10 @@ function trace(msg) {
 	function handle_packet(type, data) {
 		switch(type) {
 			case "chat": 
-				trace(data.client_name+ ": "+ data.message +" </br>");
+				trace(data.client_name+ " says: "+ data.message);
 				break;
 			case "player_joined":
-				trace(data.client_name+ ": Entered world :"+ data.x + "/" +data.y +" </br>");
+				trace(data.client_name+ " logged in.");
 				break;
 			case "response":
 				trace("response for:" + data.response_for);

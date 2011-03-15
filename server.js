@@ -91,6 +91,29 @@ function dejson(data) {
 	return JSON.parse(data);
 }
 
+
+
+var SpaceShipImage = new mongoose.Schema({
+		colorseed: Number,
+		seed: Number,
+		imagedata: String,
+});
+
+mongoose.model("SpaceShipImage", SpaceShipImage);
+
+
+function on_robot(packet, client) {
+	 var SpaceShipImage = mongoose.model("SpaceShipImage");
+	 var ship = new SpaceShipImage();
+	 ship.colorseed = packet.color;
+	 ship.seed = packet.genseed;
+	 ship.imagedata = packet.payload;
+	 ship.save();
+	 
+	 console.log("saved Spaceship to db");
+	 
+}
+
 function handle_request(client, packet) {
 			 var Images = Array();
 			 Images.push("grass.png");
@@ -123,6 +146,13 @@ function handle_packet(type, packet, client) {
 		case "request":
 				console.log("Doing Request for: " + packet.request_what );
 				handle_request(client, packet);
+				break;
+		case "robot_rendered":
+				on_robot(packet, client);
+				console.log("new robot uploaded");
+				var packrat = {};
+				packrat.type = "new_robot";
+				client.send(packrat);
 				break;
 		default:
 				console.log("No Packet Handler Found");
