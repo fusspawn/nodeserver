@@ -51,7 +51,6 @@
 					console.log(message.type);
 					
 					if(message.type=="new_robot") {
-						console.log("server requested we render a new robot");
 						setTimeout(function() {
 							need_new = true;
 						}, 1000);
@@ -67,12 +66,9 @@
 							var ship = new ship_image(message, function() {
 									space_ships.push(ship);
 							}, do_highlight);
-							
-							console.log("rendering ship: is_mine? : "+do_highlight);
 					}
 					
 					if(message.type == "set_id") {
-						console.log("our id is" + message.sessid);
 						my_session_id = message.sessid;
 					}
 			});	
@@ -89,8 +85,8 @@
 		
 		function randomXToY(minVal,maxVal,floatVal)
 		{
-		  var randVal = minVal+(Math.random()*(maxVal-minVal));
-		  return typeof floatVal=='undefined'?Math.round(randVal):randVal.toFixed(floatVal);
+			var randVal = minVal+(Math.random()*(maxVal-minVal));
+			return typeof floatVal=='undefined'?Math.round(randVal):randVal.toFixed(floatVal);
 		}
 
 		
@@ -128,7 +124,7 @@
 		ship_image.prototype.update = function() {
 			    if(this.is_on_screen()) {
 					this.y = this.y - (450/(this.travel_time/30));	// 2 second across screen;
-					this.x = this.x + (this.travel_distance/(this.travel_time/30));
+					//this.x = this.x + (this.travel_distance/(this.travel_time/30));
 				}
 		}
 		
