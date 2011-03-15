@@ -3,6 +3,7 @@
 // http://www.davebollinger.com
 // for Processing 0115 beta
 // (updated for 0119 Beta)
+// Modified by fusspawn (ariochofmelnibone@gmail.com) for gamecontent generation and processing.js use
 
 /**
 Click mouse to advance early to next pattern<br>
