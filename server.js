@@ -17,7 +17,7 @@ var mongoose = require("mongoose");
 var duodb = process.env['DUOSTACK_DB_MONGODB'];
 var localhost = "mongodb://localhost/test";
 
-var db = mongoose.connect(duodb);
+var db = mongoose.connect(localhost);
 var Player = require("./libs/Player.js").player;
 
 // GAMES DATA
@@ -109,9 +109,7 @@ function on_robot(packet, client) {
 	 ship.seed = packet.genseed;
 	 ship.imagedata = packet.payload;
 	 ship.save();
-	 
 	 console.log("saved Spaceship to db");
-	 
 }
 
 function handle_request(client, packet) {
@@ -153,6 +151,7 @@ function handle_packet(type, packet, client) {
 				var packrat = {};
 				packrat.type = "new_robot";
 				client.send(packrat);
+				socket.broadcast(packet);
 				break;
 		default:
 				console.log("No Packet Handler Found");

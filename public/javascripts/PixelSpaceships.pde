@@ -28,7 +28,7 @@ void next() {
 		need_new = false;
      }
 
-  background(255);
+  background(0);
   ship.setSeed(random(999999));
   ship.generate();
   ship.recolor();
