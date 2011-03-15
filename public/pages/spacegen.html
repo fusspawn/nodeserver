@@ -40,7 +40,8 @@
 			socket.connect();
 			
 			need_new = true;
-			var my_session_id = -1;
+			var my_session_id = 0;
+			
 			socket.on('connect', function(){
 				 robotserverokay = true;
 				 console.log("Connected");
@@ -50,6 +51,7 @@
 					console.log(message.type);
 					
 					if(message.type=="new_robot") {
+						console.log("server requested we render a new robot");
 						setTimeout(function() {
 							need_new = true;
 						}, 1000);
@@ -64,14 +66,9 @@
 							
 							var ship = new ship_image(message, function() {
 									space_ships.push(ship);
-							}, do_highlight);
+							});
 							
 							console.log("rendering ship: is_mine? : "+do_highlight);
-					}
-					
-					if(message.type == "set_id") {
-							my_session_id = message.sessid;
-							console.log("got our session id: "+ my_session_id);
 					}
 			});	
 			
@@ -86,7 +83,7 @@
 		
 		var space_ships = Array();
 		
-		function ship_image(data, callback, highlight) {
+		function ship_image(data, callback) {
 			this.imageurl = data.payload;
 			this.genseed = data.genseed;
 			this.colseed = data.color;
@@ -94,7 +91,6 @@
 			this.y = 0;
 			this.image = new Image;
 			this.image.onload = callback;
-			this.highlight = highlight;
 			this.image.src = this.imageurl;
 			this.on_screen = false;
 		}
@@ -115,9 +111,6 @@
 		ship_image.prototype.draw= function(context) {
 			if(this.is_on_screen()) {
 				context.drawImage(this.image, this.x, this.y);
-				if(this.highlight) {
-					context.strokeRect(this.x, this.y, this.image.width, this.image.height);
-				}
 			}
 		}
 		
