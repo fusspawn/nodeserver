@@ -17,7 +17,7 @@ var mongoose = require("mongoose");
 var duodb = process.env['DUOSTACK_DB_MONGODB'];
 var localhost = "mongodb://localhost/test";
 
-var db = mongoose.connect(duodb);
+var db = mongoose.connect(localhost);
 var Player = require("./libs/Player.js").player;
 
 // GAMES DATA
