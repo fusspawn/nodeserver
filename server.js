@@ -62,9 +62,9 @@ app.get('/', function(req, res){
 });
 
 app.get("/ships", function(req,res) {
-	console.log("doing ships request");
 	get_count(function(count) {
 		console.log("rendering result");
+		console.log("doing ships request there are :" +count+ships);
 		res.render("index", {
 			locals: {
 				title: "Spaceships.",
