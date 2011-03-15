@@ -2,49 +2,178 @@
 	<head>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 		<script src="../socket.io/socket.io.js"></script>
+		<style type="text/css">
+			.window {
+				z-index: 10;
+				position: absolute;
+				left: 10px;
+				top: 315px;
+				width: 70%;
+				color: lime;
+				background-color: #010;
+				opacity: .80;
+				border: 2px solid black;
+				font-family: "Lucida Console", "Monaco", "Courier New", Courier, mono;
+				font-size: small;
+				height: 135px;
+			}
+			.viewport {
+				position: absolute;
+				height: 300px;
+				width: 70%;
+				left: 10px;
+				top: 10px;
+				border: 2px solid black;
+			}
+		</style>
 	</head>
 	<body>
 	<div id="start_up">
+		Please Enter Your Name: 
 		<input type="text" id="name" />
 		<input type="submit" id="connect" />
 	</div>
 	<div id="after_connect">
-		<div id="logger">
+		<div id="stats"></div>
+		<canvas id="game_window" class="viewport">
+				No Canvas
+		</canvas>
+		<div id="logger" class="window">
 		</div>
+		Enter Chat:
 		<input type="text" id="messagetext" />
 		<input type="submit" id="send_chat" />
 	</div>
 	</body>
 </html>
-
 <script type="text/javascript">
+var MAX_LINES = 9;
+var begin = '<ul><li>';
+var middle = '</li><li>';
+var end = '</li></ul>';
+
+function trace(msg) {
+    var output_window = document.getElementById("logger");
+    var lines = output_window.innerHTML.toLowerCase();
+    var lineList;
+    
+    if (lines.length > 0) {
+        lineList = lines.substring(begin.length, lines.length - end.length).split(middle);
+        while (lineList.length >= MAX_LINES) { lineList.shift(); }
+        lineList.push(msg);
+    }
+    else {
+        lineList = [ msg ];
+    }
+	
+    output_window.innerHTML = begin +lineList.join(middle) +end;
+}
+
+
+	var Stats = {};
+	Stats["total"] = 0;
 	function after_connect() {
 		$("#start_up").hide("fast");
 		$("#after_connect").show("fast");
-		
 		$("#send_chat").click(function() {
 			var packet = {}
 			packet.client_name = chat_name;
 			packet.message = $("#messagetext").val();
-			socket.send(JSON.stringify(packet));
-			console.log("sent message");
+			packet.type = "chat";
+			send_packet(packet);
+			trace("sent message");
 		});
 
-		var socket = new io.Socket("testing.duostack.net");
+		socket = new io.Socket("testing.duostack.net");
 		socket.connect();
-		socket.on('connect', function(){ console.log("connected");
+		socket.on('connect', function(){
+    		trace("connected");
 			var packet = {}
 			packet.client_name = chat_name;
 			packet.message = "connected";
-			socket.send(JSON.stringify(packet));
+			packet.type = "chat";
+			send_packet(packet);
+			packet.message = "entered world";
+			packet.type = "enter_world";
+			send_packet(packet);
 		})
 		
 		socket.on('message', function(message){ 
-			var data = JSON.parse(message);
-			$("#logger").append(data.client_name + ": "+ data.message + "<br />");
+			handle_packet(message.type, message);
 		})
 		
-		socket.on('disconnect', function(){  console.log("Disco?!"); })
+		socket.on('disconnect', function(){  alert("disconnected from server"); })
+		run_game();
+		setInterval(do_stats, 2500);
+	}	
+	
+	function do_stats() {
+			$("#stats").text(json(Stats));
+	}
+	
+	function run_game() {
+		var GameWindow = $("#game_window")[0];
+		var GraphicsContext = GameWindow.getContext("2d");
+		load_game(init_game, GraphicsContext);
+	}
+	
+	
+	function init_game(gfx) {
+		context = gfx;
+	}
+	
+	function load_game() {
+	        trace("Requesting Data: Images...");
+			var Packet = {};
+			Packet.type= "request";
+			Packet.request_what = "image_list";
+			send_packet(Packet);
+	}
+	
+	function send_packet(MessageObject) {
+		if(!Stats[MessageObject.type])
+			Stats[MessageObject.type] = 0;
+			
+		Stats["total"]++;
+		Stats[MessageObject.type]++;
+		socket.send(json(MessageObject));
+	}
+	
+	function on_image_list(data) {
+		for(var i =0; i < data.response.length; i++)
+		{
+			trace(data.response[i]);
+		}
+	}
+	
+	function json(data) {
+		return JSON.stringify(data);
+	}
+
+	function dejson(data) {
+		return JSON.parse(data);
+	}
+	
+	function handle_packet(type, data) {
+		switch(type) {
+			case "chat": 
+				trace(data.client_name+ ": "+ data.message +" </br>");
+				break;
+			case "player_joined":
+				trace(data.client_name+ ": Entered world :"+ data.x + "/" +data.y +" </br>");
+				break;
+			case "response":
+				trace("response for:" + data.response_for);
+				if(data.response_for == "image_list") {
+					on_image_list(data);
+					trace("response for image_list done");
+				}
+				break;
+			default:
+				break;
+		}
+		
+		trace("Packet Response: "+type);
 	}
 	$(function() {
 		$("#after_connect").hide("fast");
