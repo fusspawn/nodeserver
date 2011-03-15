@@ -62,12 +62,22 @@ app.get('/', function(req, res){
 });
 
 app.get("/ships", function(req,res) {
-	res.render("index", {
-		locals: {
-			title: "Spaceships."
-		}
+	get_count(function(count) {
+		res.render("ships", {
+			locals: {
+				title: "Spaceships.",
+				count: count,
+			}
+		});
 	});
 });
+
+function get_count(callback) {
+	var model = mongoose.model("SpaceShipImage");
+	model.find({}).count(function(result) {
+			callback(result);
+	});
+}
 
 
 app.listen(80);
