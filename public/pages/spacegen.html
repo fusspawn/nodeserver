@@ -38,14 +38,17 @@
 			robotserverokay = false;
 			socket = new io.Socket("testing.duostack.net");
 			socket.connect();
+			
 			need_new = true;
 			var my_session_id = -1;
 			socket.on('connect', function(){
 				 robotserverokay = true;
+				 console.log("Connected");
 			});
 			
 			socket.on('message', function(message){ 
-					console.log(message);
+					console.log(message.type);
+					
 					if(message.type=="new_robot") {
 						setTimeout(function() {
 							need_new = true;
