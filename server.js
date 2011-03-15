@@ -93,7 +93,6 @@ function get_count(callback) {
 					callback(null);
 				}
 			});
-	});
 }
 
 
