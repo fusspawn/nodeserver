@@ -105,6 +105,7 @@
 			this.on_screen = false;
 			this.highlight = highlight;
 			this.travel_time = randomXToY(2000,4000, 0);
+			this.rotation = 0;
 		}
 		
 		ship_image.prototype.animate= function() {
@@ -120,6 +121,35 @@
 			this.dest_x = randomXToY(0, 500);
 			this.travel_distance = this.distance(this.dest_x, 0);
 			this.horizontal_distance = this.distance(this.dest_x, this.y);
+			this.face();
+		}
+		
+		
+		function wrap_angle(radians) {
+			while (radians < -Math.Pi) 
+            { 
+                radians += (Math.Pi * 2); 
+            } 
+            while (radians > Math.Pi) 
+            { 
+                radians -= (Math.Pi * 2); 
+            } 
+            return radians; 
+		}
+		
+		
+Number.prototype.clamp = function(min, max) {
+  return Math.min(Math.max(this, min), max);
+}
+		
+		ship_image.prototype.face = function() {
+			var x = this.dest_x - this.x; 
+            var y = 0 - this.y; 
+ 
+            var desiredAngle = Math.atan2(y, x); 
+            var difference = wrap_angle(desiredAngle - currentAngle); 
+            diffrence = difference.clamp(-turnSpeed, turnSpeed); 
+            return wrap_angle(currentAngle + difference); //currentAngle +  
 		}
 		
 		ship_image.prototype.update = function() {
