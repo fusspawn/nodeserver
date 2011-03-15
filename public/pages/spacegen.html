@@ -86,6 +86,7 @@
 					socket.send(JSON.stringify(packet));	
 		}
 		
+		
 		function randomXToY(minVal,maxVal,floatVal)
 		{
 		  var randVal = minVal+(Math.random()*(maxVal-minVal));
@@ -101,6 +102,7 @@
 			this.colseed = data.color;
 			this.x = 0;
 			this.y = 0;
+			this.dest_x = 0;
 			this.image = new Image;
 			this.image.onload = callback;
 			this.image.src = this.imageurl;
@@ -114,13 +116,28 @@
 			this.x = Math.random() * 500;
 		    this.x = Math.floor(this.x);
 			this.y = 450;
+			this.generate_path();
 		}
 		
-		ship_image.prototype.update= function() {
+		
+	    generate_path = function() {
+			this.dest_x = randomXToY(0, 500);
+			this.travel_distance = this.distance(this.dest_x, 0);
+		}
+		
+		ship_image.prototype.update = function() {
 			    if(this.is_on_screen()) {
 					this.y = this.y - (450/(this.travel_time/30));	// 2 second across screen;
+					this.x = this.x - (this.travel_distance/(this.travel_time/30));
 				}
 		}
+		
+		ship_image.prototype.distance(x, y) 
+        {
+                var ySep = y - this.y;
+                var xSep = x - this.x;
+                return Math.sqrtf(ySep * ySep + xSep * xSep);
+        }
 		
 		ship_image.prototype.draw= function(context) {
 			if(this.is_on_screen()) {
