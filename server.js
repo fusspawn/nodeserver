@@ -62,9 +62,13 @@ app.get('/', function(req, res){
 });
 
 app.get("/ships", function(req,res) {
-	get_count(function(count) {
+	get_count(function(ships) {
 		console.log("rendering result");
-		console.log("doing ships request there are: " +count+" ships");
+		var count = 0;
+		foreach(var ship in ships) {
+			count++;
+		}
+		
 		res.render("index", {
 			locals: {
 				title: "Spaceships.",
@@ -83,7 +87,7 @@ var SpaceShipImage = new mongoose.Schema({
 mongoose.model("SpaceShipImage", SpaceShipImage);
 
 
-function get_count(callback) {
+function get_ships(callback) {
 	var model = mongoose.model("SpaceShipImage");
 	model.find({}, function(err, data) {
 				if(!err)
