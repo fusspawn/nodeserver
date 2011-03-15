@@ -86,6 +86,13 @@
 					socket.send(JSON.stringify(packet));	
 		}
 		
+		function randomXToY(minVal,maxVal,floatVal)
+		{
+		  var randVal = minVal+(Math.random()*(maxVal-minVal));
+		  return typeof floatVal=='undefined'?Math.round(randVal):randVal.toFixed(floatVal);
+		}
+
+		
 		var space_ships = Array();
 		
 		function ship_image(data, callback, highlight) {
@@ -99,7 +106,7 @@
 			this.image.src = this.imageurl;
 			this.on_screen = false;
 			this.highlight = highlight;
-			this.travel_time = Math.floor(Math.random() * 2000);
+			this.travel_time = randomXToY(1000,3000, 0);
 		}
 		
 		ship_image.prototype.animate= function() {
