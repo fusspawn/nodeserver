@@ -60,6 +60,13 @@
 					}
 			});	
 			
+		function clear_window() {
+			var can = $("#renderall")[0];
+			context.fillStyle = "rgba(0, 0, 0, 0.1)";
+			var context = can.getContext("2d");
+			context.fillRect(0,0, 12,12);
+		}	
+			
 		function save_robot(genseed, color) {
 				    var packet = {};
 					packet.type = "robot_rendered";

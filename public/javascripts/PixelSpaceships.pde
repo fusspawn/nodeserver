@@ -29,8 +29,7 @@ void next() {
      }
 	 
 	 firstrun = false;
-
-  background(0);
+  clear_window();
   ship.setSeed(random(999999));
   ship.generate();
   ship.recolor();
