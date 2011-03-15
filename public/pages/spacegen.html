@@ -128,7 +128,7 @@
 		ship_image.prototype.update = function() {
 			    if(this.is_on_screen()) {
 					this.y = this.y - (450/(this.travel_time/30));	// 2 second across screen;
-					this.x = this.x - (this.travel_distance/(this.travel_time/30));
+					this.x = this.x + (this.travel_distance/(this.travel_time/30));
 				}
 		}
 		
