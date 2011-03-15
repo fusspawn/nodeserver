@@ -86,8 +86,14 @@ mongoose.model("SpaceShipImage", SpaceShipImage);
 function get_count(callback) {
 	var model = mongoose.model("SpaceShipImage");
 	model.find({}, function(result) {
-			console.log("mongodb returned: "+result.length);
-			callback(result.length);
+			console.log("get ships returned", function(err, data) {
+				if(!err)
+					callback(data);
+				else {
+					console.log(err);
+					callback(null);
+				}
+			});
 	});
 }
 
