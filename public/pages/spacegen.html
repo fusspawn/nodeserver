@@ -66,7 +66,7 @@
 							
 							var ship = new ship_image(message, function() {
 									space_ships.push(ship);
-							});
+							}, do_highlight);
 							
 							console.log("rendering ship: is_mine? : "+do_highlight);
 					}
@@ -88,7 +88,7 @@
 		
 		var space_ships = Array();
 		
-		function ship_image(data, callback) {
+		function ship_image(data, callback, highlight) {
 			this.imageurl = data.payload;
 			this.genseed = data.genseed;
 			this.colseed = data.color;
@@ -98,6 +98,7 @@
 			this.image.onload = callback;
 			this.image.src = this.imageurl;
 			this.on_screen = false;
+			this.highlight = highlight;
 		}
 		
 		ship_image.prototype.animate= function() {
@@ -116,6 +117,10 @@
 		ship_image.prototype.draw= function(context) {
 			if(this.is_on_screen()) {
 				context.drawImage(this.image, this.x, this.y);
+			}
+			
+			if(this.highlight) {
+				context.strokeRect(this.x, this.y, this.image.width, this.image.height);
 			}
 		}
 		
