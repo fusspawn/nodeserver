@@ -63,12 +63,7 @@ app.get('/', function(req, res){
 
 app.get("/ships", function(req,res) {
 	get_count(function(ships) {
-		console.log("rendering result");
-		var count = 0;
-		foreach(ship in ships) {
-			count++;
-		}
-		
+		var count = ships.length;		
 		res.render("index", {
 			locals: {
 				title: "Spaceships.",
