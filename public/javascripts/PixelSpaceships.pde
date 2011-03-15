@@ -15,10 +15,10 @@ int currentSeed = 0;
 boolean needsaving = false;
 boolean firstrun = true;
 void setup() {
-  size(24, 24);
+  size(48, 48);
   frameRate(30);
   ship = new PixelSpaceship();
-  ship.setScales(2,2);
+  ship.setScales(4,4);
   next();
 }
 
