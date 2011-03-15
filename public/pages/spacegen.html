@@ -119,12 +119,13 @@
 	    ship_image.prototype.generate_path = function() {
 			this.dest_x = randomXToY(0, 500);
 			this.travel_distance = this.distance(this.dest_x, 0);
+			this.horizontal_distance = this.distance(this.dest_x, this.y);
 		}
 		
 		ship_image.prototype.update = function() {
 			    if(this.is_on_screen()) {
 					this.y = this.y - (450/(this.travel_time/30));	// 2 second across screen;
-					//this.x = this.x + (this.travel_distance/(this.travel_time/30));
+					this.x = this.x + (this.horizontal_distance/(this.travel_time/30));
 				}
 		}
 		
@@ -156,9 +157,9 @@
 			var on_screen = 10;
 			
 			function draw() {
-			var can = $("#renderall")[0];
-			var context = can.getContext("2d");
-			context.fillRect(0,0, 500,450);
+				var can = $("#renderall")[0];
+				var context = can.getContext("2d");
+				context.fillRect(0,0, 500,450);
 			
 				for(var i = 0; i < known_loaded_ships.length; i++) {
 					known_loaded_ships[i].draw(context);
