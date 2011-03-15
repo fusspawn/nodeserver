@@ -74,6 +74,15 @@ app.get("/ships", function(req,res) {
 	});
 });
 
+
+var SpaceShipImage = new mongoose.Schema({
+		colorseed: Number,
+		seed: Number,
+		imagedata: String,
+});
+mongoose.model("SpaceShipImage", SpaceShipImage);
+
+
 function get_count(callback) {
 	var model = mongoose.model("SpaceShipImage");
 	model.find({}).count(function(result) {
@@ -115,17 +124,6 @@ function json(data) {
 function dejson(data) {
 	return JSON.parse(data);
 }
-
-
-
-var SpaceShipImage = new mongoose.Schema({
-		colorseed: Number,
-		seed: Number,
-		imagedata: String,
-});
-
-mongoose.model("SpaceShipImage", SpaceShipImage);
-
 
 function on_robot(packet, client) {
 	 var SpaceShipImage = mongoose.model("SpaceShipImage");
