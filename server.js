@@ -71,6 +71,11 @@ socket.on("connection", function(client) {
 	 console.log("client_connected");
 	 connected_players.push(new Player(client));
 	 
+	 var pack = {};
+	 packet.type="set_id";
+	 packet.sessid=client.sessionId;
+	 client.send(pack);
+	 
 	 client.on('message', function(message){ 
 		  var msg = "undefined";
 		  var data = JSON.parse(message);
@@ -78,7 +83,7 @@ socket.on("connection", function(client) {
 	  });
 	  
 	  client.on('disconnect', function(){
-		  connected_players[client.socketid] = null;
+		  connected_players[client.sessionId] = null;
 	  }) 
 });
 
@@ -109,6 +114,7 @@ function on_robot(packet, client) {
 	 ship.seed = packet.genseed;
 	 ship.imagedata = packet.payload;
 	 ship.save();
+	 ship.drawn_by = client.sessionId;
 	 console.log("saved Spaceship to db");
 }
 

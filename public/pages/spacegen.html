@@ -39,7 +39,7 @@
 			socket = new io.Socket("testing.duostack.net");
 			socket.connect();
 			need_new = true;
-			
+			var my_session_id = -1;
 			socket.on('connect', function(){
 				 robotserverokay = true;
 			});
@@ -52,22 +52,25 @@
 						}, 1000);
 					}
 					
-					if(message.type = "robot_rendered") {
+					if(message.type == "robot_rendered") {
+							var do_highlight  = false;
+							if(message.drawn_by == my_session_id) {
+								do_highlight = true;
+							}
+							
 							var ship = new ship_image(message, function() {
 									space_ships.push(ship);
-									console.log("new robot spawned");
-							});
+							}, do_highlight);
+					}
+					
+					if(message.type == "set_id") {
+							my_session_id = message.sessid;
+							console.log("got our session id: "+ my_session_id);
 					}
 			});	
 			
-		function clear_window() {
-			var can = $("#renderall")[0];
-			var context = can.getContext("2d");
-			context.fillRect(0,0, 12,12);
-		}	
-			
 		function save_robot(genseed, color) {
-				    var packet = {};
+					var packet = {};
 					packet.type = "robot_rendered";
 					packet.payload = $("#genpanel")[0].toDataURL();
 					packet.color = color;
@@ -77,7 +80,7 @@
 		
 		var space_ships = Array();
 		
-		function ship_image(data, callback) {
+		function ship_image(data, callback, highlight) {
 			this.imageurl = data.payload;
 			this.genseed = data.genseed;
 			this.colseed = data.color;
@@ -85,7 +88,7 @@
 			this.y = 0;
 			this.image = new Image;
 			this.image.onload = callback;
-			
+			this.highlight = highlight;
 			this.image.src = this.imageurl;
 			this.on_screen = false;
 		}
@@ -106,6 +109,9 @@
 		ship_image.prototype.draw= function(context) {
 			if(this.is_on_screen()) {
 				context.drawImage(this.image, this.x, this.y);
+				if(this.highlight) {
+					context.strokeRect(this.x, this.y, this.image.width, this.image.height);
+				}
 			}
 		}
 		
