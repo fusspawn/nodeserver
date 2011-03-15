@@ -99,6 +99,7 @@
 			this.image.src = this.imageurl;
 			this.on_screen = false;
 			this.highlight = highlight;
+			this.travel_time = Math.floor(Math.random() * 2000);
 		}
 		
 		ship_image.prototype.animate= function() {
@@ -110,7 +111,7 @@
 		
 		ship_image.prototype.update= function() {
 			    if(this.is_on_screen()) {
-					this.y = this.y - (450/(2000/30));	// 2 second across screen;
+					this.y = this.y - (450/(this.travel_time/30));	// 2 second across screen;
 				}
 		}
 		
