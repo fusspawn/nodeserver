@@ -134,6 +134,7 @@
 		
 		ship_image.prototype.distance(x, y) 
         {
+				console.log("X: "+ x +" Y:"+y);
                 var ySep = y - this.y;
                 var xSep = x - this.x;
                 return Math.sqrt(ySep * ySep + xSep * xSep);
