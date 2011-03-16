@@ -170,12 +170,11 @@ Number.prototype.clamp = function(min, max) {
 				context.save();
 				context.rotate(this.rotation);
 				context.drawImage(this.image, this.x, this.y);
+				if(this.highlight) {
+					context.strokeStyle = "lime";
+					context.strokeRect(this.x, this.y, this.image.width, this.image.height);
+				}
 				context.restore();
-			}
-			
-			if(this.highlight) {
-				context.strokeStyle = "lime";
-				context.strokeRect(this.x, this.y, this.image.width, this.image.height);
 			}
 		}
 		
