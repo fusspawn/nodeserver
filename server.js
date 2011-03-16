@@ -81,7 +81,7 @@ app.get("/randomship", function(req,res) {
 		 res.end(json(ships[random_ship_index]));
 		 console.log("served random image");
 	});
-}
+});
 
 function random_between(minVal,maxVal,floatVal)
 {
