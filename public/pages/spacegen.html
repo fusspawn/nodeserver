@@ -147,9 +147,8 @@ Number.prototype.clamp = function(min, max) {
             var y = 0 - this.y; 
  
             var desiredAngle = Math.atan2(y, x); 
-            var difference = wrap_angle(desiredAngle - currentAngle); 
-            diffrence = difference.clamp(-turnSpeed, turnSpeed); 
-            return wrap_angle(currentAngle + difference); //currentAngle +  
+            var difference = wrap_angle(desiredAngle - this.rotation); 
+            this.rotation =  wrap_angle(this.rotation + difference); //currentAngle +  
 		}
 		
 		ship_image.prototype.update = function() {
@@ -168,7 +167,10 @@ Number.prototype.clamp = function(min, max) {
 		
 		ship_image.prototype.draw= function(context) {
 			if(this.is_on_screen()) {
+				context.save();
+				context.rotate(this.rotation);
 				context.drawImage(this.image, this.x, this.y);
+				context.restore();
 			}
 			
 			if(this.highlight) {
