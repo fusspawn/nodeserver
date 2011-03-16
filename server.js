@@ -79,6 +79,7 @@ app.get("/randomship", function(req,res) {
 		 var ship_count = ships.length;
 		 var random_ship_index = random_between(1, ship_count -1);
 		 res.end(json(ships[random_ship_index]));
+		 console.log("served random image");
 	});
 }
 
