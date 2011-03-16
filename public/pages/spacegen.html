@@ -168,6 +168,7 @@ Number.prototype.clamp = function(min, max) {
 		ship_image.prototype.draw= function(context) {
 			if(this.is_on_screen()) {
 				context.save();
+				context.translate(this.x + 24, this.y + 24);
 				context.rotate(this.rotation);
 				context.drawImage(this.image, this.x, this.y);
 				if(this.highlight) {
