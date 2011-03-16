@@ -71,8 +71,7 @@ app.get("/ships", function(req,res) {
 		res.render("ships.ejs", {
 			locals: {
 				count: "over 9000",
-			};
-			
+			},
 			layout: false
 		});
 	});
