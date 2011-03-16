@@ -18,13 +18,15 @@
 		<div id="container"> </div>
 		<script type="text/javascript">
 		   $(function() {
-				$.get('./randomship', {}, function(data) {
-					 var image = new Image;
-					 image.onload = function() {
-						$('#container').append(image);
-					 }
-					 image.src = data.imagedata;
-				}, 'json');
+				for(var i = 0; i < 6; i++) {
+					$.get('./randomship', {}, function(data) {
+						 var image = new Image;
+						 image.onload = function() {
+							$('#container').append(image);
+						 }
+						 image.src = data.imagedata;
+					}, 'json');
+				}
 		   });
 		</script>
 	</body>
