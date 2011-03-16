@@ -67,11 +67,12 @@ app.get("/ships", function(req,res) {
 	get_ships(function(ships) {
 		var count = ships.length;	
 		console.log("doing render");
+		
 		res.render("ships.ejs", {
 			locals: {
-				title: "Spaceships",
 				count: "over 9000",
-			}
+			};
+			
 			layout: false
 		});
 	});
