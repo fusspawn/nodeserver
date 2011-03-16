@@ -8,3 +8,14 @@ p  below are some that have been generated before
 
 #container  
 a(href='http://testing.duostack.net:9980/pages/spacegen.html', title='View generation page') Generate New Ships  
+
+script
+   $(function() {
+		$.get('./randomship', {}, function(data) {
+			 var image = new Image;
+			 image.onload = function() {
+				$('#container').append(image);
+			 }
+			 image.src = data.imagedata;
+		}, 'json');
+   });
