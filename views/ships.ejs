@@ -1,0 +1,30 @@
+</html>
+	<head>
+    <title> <%= title %> </title>
+    <link rel='stylesheet', href='/stylesheets/style.css'/>
+	</head>
+	</body>
+		<h1> <%= title %> </h1>
+		<p> Welcome to <%= title %> </p>
+		<p> There are <%= count %> spaceships already generated </p>
+		<p>
+		   Click the link </br>
+		   below to help generate some new ones! </br>
+		   <a href='http://testing.duostack.net:9980/pages/spacegen.html', title='View generation page') Generate New Ships  
+		</p>
+		 
+		<p> below are some that have been generated before </p>
+		<div id="container"> </div>
+		<script type="text/javascript">
+		   $(function() {
+				$.get('./randomship', {}, function(data) {
+					 var image = new Image;
+					 image.onload = function() {
+						$('#container').append(image);
+					 }
+					 image.src = data.imagedata;
+				}, 'json');
+		   });
+		</script>
+	</body>
+</html>
