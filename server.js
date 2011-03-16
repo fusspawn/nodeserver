@@ -5,6 +5,8 @@ Array.remove = function(array, from, to) {
   return array.push.apply(array, rest);
 };
 
+GLOBAL.DEBUG = true;
+
 /**
  * Module dependencies.
  */
@@ -17,7 +19,7 @@ var mongoose = require("mongoose");
 var duodb = process.env['DUOSTACK_DB_MONGODB'];
 var localhost = "mongodb://localhost/test";
 
-var db = mongoose.connect(duodb);
+var db = mongoose.connect(localhost);
 var Player = require("./libs/Player.js").player;
 
 // GAMES DATA
@@ -101,6 +103,7 @@ function get_ships(callback) {
 	var model = mongoose.model("SpaceShipImage");
 	console.log("got mongoose model");
 	model.find({}, function(err, data) {
+				console.log("got docs");
 				if(!err)
 					callback(data);
 				else {
