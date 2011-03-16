@@ -4,19 +4,8 @@ p There are #{count} spaceships already generated
 p 
   |	Click the link 
   | here to help generate some new ones!
+  | below are some that have been generate before
   
 #container
   
 a(href='http://testing.duostack.net:9980/pages/spacegen.html', title='View generation page') Generate New Ships  
-
-script(type='text/javascript')
-      $(function() {
-		 var image_div = $("#container");
-		 $.get("./randomship", function(data) {
-				var ImageObj = new Image;
-				ImageObj.onload = function() {
-					image_div.append(ImageObj);
-				}
-				ImageObj.src = data.imagedata;
-		 }, "json");
-	  });
