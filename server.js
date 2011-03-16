@@ -67,7 +67,7 @@ app.get("/ships", function(req,res) {
 		console.log("there were: "+count);
 		res.render("ships.ejs", {
 			locals: {
-				title: "Spaceships.",
+				title: "Spaceships",
 				count: count,
 			}
 		});
