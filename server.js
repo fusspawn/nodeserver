@@ -71,6 +71,7 @@ app.get("/ships", function(req,res) {
 				title: "Spaceships",
 				count: "over 9000",
 			}
+			layout: false
 		});
 	});
 });
