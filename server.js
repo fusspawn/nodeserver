@@ -62,7 +62,6 @@ app.get('/', function(req, res){
 });
 
 app.get("/ships", function(req,res) {
-	console.log("doing ships request");
 	get_ships(function(ships) {
 		var count = ships.length;	
 		console.log("there were: "+count);
@@ -72,10 +71,22 @@ app.get("/ships", function(req,res) {
 				count: count,
 			}
 		});
-		
-		console.log("render done");
 	});
 });
+
+app.get("/randomship", function(req,res) {
+	get_ships(function(ships) {
+		 var ship_count = ships.length;
+		 var random_ship_index = random_between(1, ship_count -1);
+		 res.end(json(ships[random_ship_index]));
+	});
+}
+
+function random_between(minVal,maxVal,floatVal)
+{
+	var randVal = minVal+(Math.random()*(maxVal-minVal));
+	return typeof floatVal=='undefined'?Math.round(randVal):randVal.toFixed(floatVal);
+}
 
 
 var SpaceShipImage = new mongoose.Schema({
