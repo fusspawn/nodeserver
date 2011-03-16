@@ -66,6 +66,7 @@ app.get('/', function(req, res){
 app.get("/ships", function(req,res) {
 	get_ships(function(ships) {
 		var count = ships.length;	
+		console.log("doing render");
 		res.render("ships.ejs", {
 			locals: {
 				title: "Spaceships",
