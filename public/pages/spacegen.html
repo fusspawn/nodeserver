@@ -147,7 +147,8 @@ Number.prototype.clamp = function(min, max) {
             var y = 0 - this.y; 
  
             var desiredAngle = Math.atan2(y, x); 
-            var difference = wrap_angle(desiredAngle - this.rotation); 
+            var difference = wrap_angle(desiredAngle - this.rotation);
+			difference = difference.clamp(1, -1);
             this.rotation =  wrap_angle(this.rotation + difference); //currentAngle +  
 		}
 		
