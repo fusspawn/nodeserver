@@ -62,9 +62,16 @@
 				Extends: JxlSprite,
 				initialize: function(graphic, x, y) {
 				  this.parent(graphic, x, y);
+				  this.rotatespeed = 1;
 				},
 				update: function(game, time) {
-				  this.angle += 10;
+				    if("A" in game.keys) {
+						this.angle = this.speed;
+					}
+					
+					if("D" in game.keys) {
+						this.angle = -1*this.rotatespeed;
+					}
 				  this.parent(game, time);
 				}
 			});
