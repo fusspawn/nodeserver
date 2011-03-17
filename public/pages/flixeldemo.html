@@ -84,8 +84,8 @@
 					    this.movespeed = -1;
 					}
 					
-					this.x += Math.sin(this.angle) * this.movespeed;
-					this.y += Math.cos(this.angle) * this.movespeed;
+					this.x += Math.sin(this.angle * (math.Pi / 180)) * this.movespeed;
+					this.y += Math.cos(this.angle  * (math.Pi / 180)) * this.movespeed;
 				}
 			});
 	 });
