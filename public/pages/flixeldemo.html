@@ -15,6 +15,10 @@
 </html>
 
 <script type="text/javascript">
+		Number.prototype.clamp = function(min, max) {
+		  return Math.min(Math.max(this, min), max);
+		}
+		
 	 $(function() {
 			var canvas = $("#gamewindow")[0];
 			canvas.getContext("2d");
@@ -76,9 +80,11 @@
 					 this.movespeed = 0;
 					 if("A" in game.keys) {
 						this.angle += -1*this.rotatespeed;
+						this.angle.clamp(0, 360);
 					}
 					if("D" in game.keys) {
 						this.angle += this.rotatespeed;
+						this.angle.clamp(0, 360);
 					}
 					if("W" in game.keys) {
 						this.movespeed = 1;
