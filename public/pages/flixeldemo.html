@@ -69,7 +69,7 @@
 				
 				update: function(game, time) {
 				  this.controlmove(game, time);
-				  this.update_trail(game, time);
+				  // this.update_trail(game, time);
 				  this.parent(game, time);
 				},
 				
@@ -81,6 +81,7 @@
 				},
 				
 				controlmove: function(game, time) {
+					this.movespeed = 0;
 					if("A" in game.keys) {
 						this.angle += -1*this.rotatespeed;
 						this.angle.clamp(0, 360);
@@ -90,19 +91,19 @@
 						this.angle.clamp(0, 360);
 					}
 					if("W" in game.keys) {
-						this.movespeed += 1;
-						this.trail.emitParticle();
+						this.movespeed = 1;
+						//this.trail.emitParticle();
 					}
 					if("S" in game.keys) {
-					    this.movespeed +=  -1;
-						this.trail.emitParticle();
+					    this.movespeed =  -1;
+						//this.trail.emitParticle();
 					}
 					
-					console.log("Time Elapsed: " + time);
-					
-					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
 					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / 1);
 					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / 1);
+					this.velocity.x.clamp(-1*this.movespeed. this.movespeed);
+					this.velocity.y.clamp(-1*this.movespeed. this.movespeed);
+					
 					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 				}
