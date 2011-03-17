@@ -98,6 +98,8 @@
 						this.trail.emitParticle();
 					}
 					
+					console.log("Time Elapsed: " + time);
+					
 					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
 					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
