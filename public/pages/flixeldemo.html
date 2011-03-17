@@ -63,16 +63,29 @@
 				initialize: function(graphic, x, y) {
 				  this.parent(graphic, x, y);
 				  this.rotatespeed = 5;
+				  this.movespeed = 0;
 				},
 				update: function(game, time) {
-				    if("A" in game.keys) {
+				  this.controlmove(game, time);
+				},
+				
+				controlmove: function(game, time) {
+					 this.movespeed = 0;
+					 if("A" in game.keys) {
 						this.angle += this.rotatespeed;
 					}
-					
 					if("D" in game.keys) {
 						this.angle += -1*this.rotatespeed;
 					}
-				  this.parent(game, time);
+					if("W" in game.keys) {
+						this.movespeed = 1;
+					}
+					if("S" in game.keys) {
+					    this.movespeed = -1;
+					}
+					
+					this.x += Math.sin(this.angle) * this.movespeed;
+					this.y += Math.cos(this.angle) * this.movespeed;
 				}
 			});
 	 });
