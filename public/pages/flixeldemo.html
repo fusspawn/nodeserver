@@ -19,7 +19,6 @@
 			var canvas = $("#gamewindow")[0];
 			canvas.getContext("2d");
 			var JixelInstance = new Jixel(canvas);
-			
 			var assets = {
 				"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABn0lEQVRoQ2NkYGD4D8RDFjCOemCA4240BibOr2RgYASFAwTkJ7ThjZMTt1cA1SOUWKhEUBSHFMfAqAdGY4DCeqB3fi5KHihOmIQ3TR+8PQ1Fvb1K5sDmgVEPjMYAhXmgY34iSrlekTAfb5redbsNudpgcFWpGtg8MOqB0RigMA9QlICpoJnithAV3ECREaMeoCj4qKCZYAxEpXgDm++IBvzSOVuoYC1uI0htno96gNrRMRoDbub6KO11OXFRlLaOnIQwMNAReaI2Pgw1EvhEUPmf3qDxX6OYv+/Oc5S20cMXr4F8hPmPXrxCsa9uxnIU8zDywKgHRmOAwiREaqny//h6ivIAo1sqqVbizwOkmjbqgdEYINAfSHEzQSmH5YQFUOqFlCjQ2CbSYCe3EAqX4ctbVPnP71BS6fW7N5F1Mzx89R6lHkiYuBpvqibYFhr1wGgMkJiE3LS0UNoqu65eJbVkpar6Jj8/FPfUbdxIoC006gGqRgDDyIsB6oYf7U0jWA/Q3gmU2TDqAcrCj3LdozFAeRhSZsJoDFAWfpTrBgA+VDgQVkJr3QAAAABJRU5ErkJggg=="]
 			};
@@ -37,7 +36,7 @@
 				Extends: JxlSprite,
 				
 				initialize: function(graphic, x, y) {
-					this.parent(graphic, x, y, 64,64);
+					this.parent(graphic, x, y, 48, 48);
 					console.log("Player Spawned At X: "+x+" Y: "+y);
 					this.speed = -80;
 				},
