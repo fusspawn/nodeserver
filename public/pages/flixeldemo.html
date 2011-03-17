@@ -71,14 +71,15 @@
 				  this.rotatespeed = 5;
 				  this.movespeed = 0;
 				  this.target = target;
+				  this.angle = 90;
 				},
 				update: function(game, time) {
 				  this.controlmove(game, time);
 				},
 				
 				controlmove: function(game, time) {
-					 this.movespeed = 0;
-					 if("A" in game.keys) {
+					this.movespeed = 0;
+					if("A" in game.keys) {
 						this.angle += -1*this.rotatespeed;
 						this.angle.clamp(0, 360);
 					}
@@ -95,8 +96,13 @@
 					
 					// this.angle * (Math.PI / 180)
 					
+					this.target.x = this.x;
+					this.target.y = this.y;
+					
 					this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.y += Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
+					
+					
 					this.target.x += (Math.sin(this.angle * (Math.PI / 180)) * this.movespeed) * 2;
 					this.target.y += (Math.cos(this.angle * (Math.PI / 180)) * this.movespeed) * 2;
 					
