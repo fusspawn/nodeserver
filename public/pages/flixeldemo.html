@@ -46,14 +46,34 @@
 			var ShipController = new Class({
 				Extends: JxlSprite,
 				initialize: function(graphic, x, y) {
-				  this.parent(graphic, x, y);
-				  this.rotatespeed = 5;
-				  this.movespeed = 0;
-				  this.angle = 90;
-				  this.maxspeed = 1.2;
+					  this.parent(graphic, x, y);
+					  this.rotatespeed = 5;
+					  this.movespeed = 0;
+					  this.angle = 90;
+					  this.maxspeed = 1.2;
+					  this.trail = new JxlEmitter(this.x, this.y);
+					  this.forward = {};
+					  this.forward.x = this.x;
+					  this.forward.y = this.y;
+					  this.max_trail_particles = 10;
+					  
+					  for(i = 0; i < this.max_trail_particles; i++)
+					  {
+							var particle = new JxlParticle(1);
+							particle.createGraphic(4, 4, Math.floor(Math.random() * 0xFFFFFFFF));
+							this.trail.add(particle);
+					  }
 				},
 				update: function(game, time) {
 				  this.controlmove(game, time);
+				  this.update_trail(game, time) 
+				},
+				
+				update_trail: function(game, time) {
+					this.trail.x = this.x;
+					this.trail.y = this.y;
+					this.setXSpeed(-1*this.forward.x, -1*this.forward.x);
+					this.setYSpeed(-1*this.forward.y, -1*this.forward.y);
 				},
 				
 				controlmove: function(game, time) {
@@ -67,14 +87,18 @@
 					}
 					if("W" in game.keys) {
 						this.movespeed += 1;
+						this.trail.emitParticle();
 					}
 					if("S" in game.keys) {
 					    this.movespeed +=  -1;
+						this.trail.emitParticle();
 					}
 					
 					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
 					this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
+					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
+					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 				}
 			});
 	 });
