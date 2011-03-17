@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title> Flixel Demo :: Fusspawn Style </title>
+		<title> Jixel Demo :: Fusspawn Style </title>
 		
 		<link type="text/css" rel="stylesheet" href="../../css/ui-lightness/jquery-ui.css"/>
 		<link href='http://fonts.googleapis.com/css?family=Geo' rel='stylesheet' type='text/css'/>
@@ -51,6 +51,10 @@
 						this.velocity.x = -1*this.speed;
 					}
 					
+					if('SPACE' in game.keys) {
+						this.x = 0;
+						this.y = 0;
+					}
 					this.parent(game, time);
 				}
 			});
