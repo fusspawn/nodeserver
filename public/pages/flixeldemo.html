@@ -66,11 +66,11 @@
 				},
 				update: function(game, time) {
 				    if("A" in game.keys) {
-						this.angle = this.rotatespeed;
+						this.angle += this.rotatespeed;
 					}
 					
 					if("D" in game.keys) {
-						this.angle = -1*this.rotatespeed;
+						this.angle += -1*this.rotatespeed;
 					}
 				  this.parent(game, time);
 				}
