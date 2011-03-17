@@ -258,7 +258,7 @@ var Jixel = new Class({
     update: function(delta) {
 		this.ctx.save();
 		this.ctx.fillStyle = this.fillStyle;
-		this.ctx.drawRect(0,0, this.width, this.height);
+		this.ctx.fillRect(0,0, this.width, this.height);
 		this.ctx.restore();
         this.doFollow(delta);
         if(this.showFPS) {
