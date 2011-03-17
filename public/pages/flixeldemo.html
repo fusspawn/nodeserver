@@ -24,8 +24,10 @@
 			};
 			
 			JixelInstance.am.load(assets, function() {
-				var player = new Ship(JixelInstance.am.get("ship"), 50, 50);
+			    var target = new JxlSprite(JixelInstance.am.get("ship"), 50, 50);
+				var player = new Ship(JixelInstance.am.get("ship"), 50, 50, target);
 				JixelInstance.state.add(player);
+				JixelInstance.state.add(target);
 				//JixelInstance.follow(player);
 				JixelInstance.start();
 				JixelInstance.showFPS();
@@ -60,7 +62,7 @@
 			
 			var Ship = new Class({
 				Extends: JxlSprite,
-				initialize: function(graphic, x, y) {
+				initialize: function(graphic, x, y, target) {
 				  this.parent(graphic, x, y);
 				  this.rotatespeed = 5;
 				  this.movespeed = 0;
@@ -86,6 +88,8 @@
 					
 					this.x += Math.sin(this.angle) * this.movespeed;
 					this.y += Math.cos(this.angle) * this.movespeed;
+					this.target.x += Math.sin(this.angle) * this.movespeed * 10;
+					this.target.y += Math.cos(this.angle) * this.movespeed * 10;
 				}
 			});
 	 });
