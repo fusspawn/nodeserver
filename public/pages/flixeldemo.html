@@ -28,10 +28,8 @@
 			};
 			
 			JixelInstance.am.load(assets, function() {
-			    var target = new JxlSprite(JixelInstance.am.get("ship"), 50, 50);
-				var player = new Ship(JixelInstance.am.get("ship"), 50, 50, target);
+				var player = new Ship(JixelInstance.am.get("ship"), 50, 50);
 				JixelInstance.state.add(player);
-				JixelInstance.state.add(target);
 				//JixelInstance.follow(player);
 				JixelInstance.start();
 				JixelInstance.showFPS();
@@ -72,13 +70,13 @@
 				  this.movespeed = 0;
 				  this.target = target;
 				  this.angle = 90;
+				  this.maxspeed = 3;
 				},
 				update: function(game, time) {
 				  this.controlmove(game, time);
 				},
 				
 				controlmove: function(game, time) {
-					this.movespeed = 0;
 					if("A" in game.keys) {
 						this.angle += -1*this.rotatespeed;
 						this.angle.clamp(0, 360);
@@ -88,23 +86,15 @@
 						this.angle.clamp(0, 360);
 					}
 					if("W" in game.keys) {
-						this.movespeed = 1;
+						this.movespeed += 1;
 					}
 					if("S" in game.keys) {
-					    this.movespeed =  -1;
+					    this.movespeed +=  -1;
 					}
 					
-					// this.angle * (Math.PI / 180)
-					
-					this.target.x = this.x;
-					this.target.y = this.y;
-					
+					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
 					this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
-					this.target.x += (Math.sin(this.angle) * this.movespeed) * 2;
-					this.target.y -= (Math.cos(this.angle) * this.movespeed) * 2;
-					
-					this.target.angle = this.angle;
 				}
 			});
 	 });
