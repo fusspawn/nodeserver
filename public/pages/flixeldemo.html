@@ -28,7 +28,7 @@
 			};
 			
 			JixelInstance.am.load(assets, function() {
-				var player = new Ship(JixelInstance.am.get("ship"), 50, 50);
+				var player = new ShipController(JixelInstance.am.get("ship"), 50, 50);
 				JixelInstance.state.add(player);
 				//JixelInstance.follow(player);
 				JixelInstance.start();
@@ -36,41 +36,16 @@
 			});
 			
 			
-			var PlayerController = new Class({
-				Extends: JxlSprite,
-				
-				initialize: function(graphic, x, y) {
-					this.parent(graphic, x, y, 48, 48);
-					console.log("Player Spawned At X: "+x+" Y: "+y);
-					this.speed = -80;
-				},
-				
-				update: function(game, time) {
-					if("A" in game.keys) {
-						this.velocity.x = this.speed;
-					}
-					
-					if("D" in game.keys) {
-						this.velocity.x = -1*this.speed;
-					}
-					
-					if('SPACE' in game.keys) {
-						this.x = 0;
-						this.y = 0;
-					}
-					this.parent(game, time);
-				}
-			});
 			
-			var Ship = new Class({
+			
+			var ShipController = new Class({
 				Extends: JxlSprite,
-				initialize: function(graphic, x, y, target) {
+				initialize: function(graphic, x, y) {
 				  this.parent(graphic, x, y);
 				  this.rotatespeed = 5;
 				  this.movespeed = 0;
-				  this.target = target;
 				  this.angle = 90;
-				  this.maxspeed = 3;
+				  this.maxspeed = 1.2;
 				},
 				update: function(game, time) {
 				  this.controlmove(game, time);
