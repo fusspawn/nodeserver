@@ -103,8 +103,8 @@
 					this.y += Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 					
 					
-					this.target.x += (Math.sin(this.angle * (Math.PI / 180)) * this.movespeed) * 2;
-					this.target.y += (Math.cos(this.angle * (Math.PI / 180)) * this.movespeed) * 2;
+					this.target.x += (Math.sin(this.angle) * this.movespeed) * 2;
+					this.target.y += (Math.cos(this.angle)) * this.movespeed) * 2;
 					
 					this.target.angle = this.angle;
 				}
