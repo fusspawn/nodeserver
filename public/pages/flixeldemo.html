@@ -78,10 +78,10 @@
 						this.angle += -1*this.rotatespeed;
 					}
 					if("W" in game.keys) {
-						this.movespeed = 1;
+						this.movespeed = -1;
 					}
 					if("S" in game.keys) {
-					    this.movespeed = -1;
+					    this.movespeed = 1;
 					}
 					
 					this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
