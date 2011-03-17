@@ -99,8 +99,8 @@
 					}
 					
 					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
-					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
-					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
+					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
+					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 				}
