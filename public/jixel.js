@@ -256,11 +256,9 @@ var Jixel = new Class({
         this.am.reload('image');
     },
     update: function(delta) {
-		this.ctx.save();
+		this.fillStyle = "black";
 		this.ctx.fillStyle = this.fillStyle;
-		this.ctx.fillRect(0,0, this.width, this.height);
-		this.ctx.restore();
-        this.doFollow(delta);
+		this.ctx.fillRect(0,0, this.width, this.height        this.doFollow(delta);
         if(this.showFPS) {
             this.ui.fps.html(Math.floor(1/delta));
         }
