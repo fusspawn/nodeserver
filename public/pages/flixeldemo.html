@@ -101,8 +101,8 @@
 					console.log("Time Elapsed: " + time);
 					
 					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
-					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * 1;
-					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * 1;
+					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / 1);
+					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / 1);
 					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 				}
