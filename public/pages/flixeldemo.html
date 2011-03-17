@@ -24,6 +24,7 @@
 			canvas.getContext("2d");
 			
 			var JixelInstance = new Jixel(canvas);
+			
 			JixelInstance.changeScale(2);
 			JixelInstance.screenWidth(window.innerWidth);
 			JixelInstance.screenHeight(window.innerHeight);
@@ -65,6 +66,7 @@
 							this.trail.add(particle);
 					  }
 				},
+				
 				update: function(game, time) {
 				  this.controlmove(game, time);
 				  this.update_trail(game, time) 
@@ -101,6 +103,7 @@
 					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 				}
+				
 			});
 	 });
 </script>

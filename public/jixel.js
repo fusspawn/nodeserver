@@ -256,6 +256,10 @@ var Jixel = new Class({
         this.am.reload('image');
     },
     update: function(delta) {
+		this.ctx.save();
+		this.ctx.fillStyle = this.fillStyle;
+		this.ctx.drawRect(0,0, this.width, this.height);
+		this.ctx.restore();
         this.doFollow(delta);
         if(this.showFPS) {
             this.ui.fps.html(Math.floor(1/delta));
@@ -1178,7 +1182,6 @@ var JxlEmitter = new Class({
     setYSpeed: function(Min, Max) {
         Min = ( Min == undefined) ? 0 : Min;
         Max = ( Max == undefined) ? 0 : Max;
-    
         this.minParticleSpeed.y = Min;
         this.maxParticleSpeed.y = Max;
     },
