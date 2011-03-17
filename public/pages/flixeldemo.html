@@ -69,7 +69,8 @@
 				
 				update: function(game, time) {
 				  this.controlmove(game, time);
-				  this.update_trail(game, time) 
+				  this.update_trail(game, time);
+				  this.parent(game, time);
 				},
 				
 				update_trail: function(game, time) {
@@ -98,8 +99,8 @@
 					}
 					
 					this.movespeed.clamp(-this.maxspeed, this.maxspeed);
-					this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
-					this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
+					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
+					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
 					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
 				}
