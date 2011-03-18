@@ -47,8 +47,6 @@
 			var ShipController = new Class({
 				Extends: JxlSprite,
 				initialize: function(graphic, x, y) {
-					  this.acceleration.y = 50;
-					  this.acceleration.x = 50;
 					  this.parent(graphic, x, y);
 					  this.rotatespeed = 10;
 					  this.movespeed = 0;
@@ -59,6 +57,7 @@
 					  this.forward.x = this.x;
 					  this.forward.y = this.y;
 					  this.max_trail_particles = 50;
+					  this.set
 					  
 					  for(i = 0; i < this.max_trail_particles; i++)
 					  {
