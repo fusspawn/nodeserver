@@ -75,8 +75,10 @@
 				
 				update_trail: function(game, time) {
 					this.trail.at(this);
-					this.trail.setXSpeed(-1*this.forward.x, -1*this.forward.x);
-					this.trail.setYSpeed(-1*this.forward.y, -1*this.forward.y);
+					var xspeed = (-1 * this.forward.x) * 10;
+					var yspeed = (-1 * this.forward.y) * 10;
+					this.trail.setXSpeed(xspeed, xspeed);
+					this.trail.setYSpeed(yspeed, yspeed);
 				},
 				
 				controlmove: function(game, time) {
