@@ -91,11 +91,11 @@
 					}
 					if("W" in game.keys) {
 						this.movespeed = 1;
-						this.trail.start(false, 1.2);
+						this.trail.start(false, 0, 5);
 					}
 					if("S" in game.keys) {
 					    this.movespeed =  -1;
-						this.trail.start(false, 1.2);
+						this.trail.start(false, 0, 5);
 					}
 					
 					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
