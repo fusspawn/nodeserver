@@ -74,8 +74,7 @@
 				},
 				
 				update_trail: function(game, time) {
-					this.trail.x = this.x;
-					this.trail.y = this.y;
+					this.trail.at(this);
 					this.trail.setXSpeed(-1*this.forward.x, -1*this.forward.x);
 					this.trail.setYSpeed(-1*this.forward.y, -1*this.forward.y);
 				},
@@ -92,11 +91,11 @@
 					}
 					if("W" in game.keys) {
 						this.movespeed = 1;
-						//this.trail.emitParticle();
+						this.trail.start(false, 1.2);
 					}
 					if("S" in game.keys) {
 					    this.movespeed =  -1;
-						//this.trail.emitParticle();
+						this.trail.start(false, 1.2);
 					}
 					
 					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
@@ -104,8 +103,8 @@
 					this.velocity.x.clamp(-1*this.movespeed, this.movespeed);
 					this.velocity.y.clamp(-1*this.movespeed, this.movespeed);
 					
-					this.forward.x  += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed / time;
-					this.forward.y  -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed / time;
+					this.forward.x  += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
+					this.forward.y  -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 				}
 				
 			});
