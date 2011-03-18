@@ -47,7 +47,8 @@
 			var ShipController = new Class({
 				Extends: JxlSprite,
 				initialize: function(graphic, x, y) {
-				
+					  this.acceleration.y = 50;
+					  this.acceleration.x = 50;
 					  this.parent(graphic, x, y);
 					  this.rotatespeed = 10;
 					  this.movespeed = 0;
