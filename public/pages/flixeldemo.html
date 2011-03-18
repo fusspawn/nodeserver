@@ -49,7 +49,7 @@
 				initialize: function(graphic, x, y) {
 				
 					  this.parent(graphic, x, y);
-					  this.rotatespeed = 5;
+					  this.rotatespeed = 10;
 					  this.movespeed = 0;
 					  this.angle = 90;
 					  this.maxspeed = 1.2;
@@ -101,7 +101,7 @@
 					
 					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
-					this.velocity.x.clamp(-1*this.movespeed,this.movespeed);
+					this.velocity.x.clamp(-1*this.movespeed, this.movespeed);
 					this.velocity.y.clamp(-1*this.movespeed, this.movespeed);
 					
 					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed / time;
