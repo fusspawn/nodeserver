@@ -99,13 +99,13 @@
 						//this.trail.emitParticle();
 					}
 					
-					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / 1);
-					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / 1);
+					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
+					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 					this.velocity.x.clamp(-1*this.movespeed,this.movespeed);
 					this.velocity.y.clamp(-1*this.movespeed, this.movespeed);
 					
-					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed;
-					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed;
+					this.forward.x = this.x += Math.sin(this.angle * (Math.PI / 180)) * this.movespeed / time;
+					this.forward.y = this.y -= Math.cos(this.angle * (Math.PI / 180)) * this.movespeed / time;
 				}
 				
 			});
