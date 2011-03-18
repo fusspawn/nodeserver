@@ -1243,7 +1243,7 @@ var JxlEmitter = new Class({
         Quantity = ( Quantity == undefined) ? 0 : Quantity;
     
         if(this.members.length <= 0) {
-            //FlxG.log("WARNING: there are no sprites loaded in your emitter.\nAdd some to FlxEmitter.members or use FlxEmitter.createSprites().");
+            console.log("WARNING: there are no sprites loaded in your emitter.\nAdd some to FlxEmitter.members or use FlxEmitter.createSprites().");
             return this;
         }
         this._explode = Explode;
