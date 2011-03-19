@@ -1,7 +1,19 @@
 <html>
 	<head>
 		<title> Jixel Demo :: Fusspawn Style </title>
-		
+		<style type="text/css"> 
+		body {             
+			background-repeat:repeat;        
+			background-color:black;        
+			margin:0px;        
+			padding:0px;        
+			overflow:hidden;        
+			font-family:'Geo';     
+		}      
+		.ui-widget {       
+			font-family:'Geo' !important;   
+		}      
+		</style>
 		<link type="text/css" rel="stylesheet" href="../../css/ui-lightness/jquery-ui.css"/>
 		<link href='http://fonts.googleapis.com/css?family=Geo' rel='stylesheet' type='text/css'/>
         <script type="text/javascript" src="../../js/jquery.js"></script>
@@ -30,7 +42,8 @@
 			JixelInstance.screenHeight(window.innerHeight);
 			
 			var assets = {
-				"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABn0lEQVRoQ2NkYGD4D8RDFjCOemCA4240BibOr2RgYASFAwTkJ7ThjZMTt1cA1SOUWKhEUBSHFMfAqAdGY4DCeqB3fi5KHihOmIQ3TR+8PQ1Fvb1K5sDmgVEPjMYAhXmgY34iSrlekTAfb5redbsNudpgcFWpGtg8MOqB0RigMA9QlICpoJnithAV3ECREaMeoCj4qKCZYAxEpXgDm++IBvzSOVuoYC1uI0htno96gNrRMRoDbub6KO11OXFRlLaOnIQwMNAReaI2Pgw1EvhEUPmf3qDxX6OYv+/Oc5S20cMXr4F8hPmPXrxCsa9uxnIU8zDywKgHRmOAwiREaqny//h6ivIAo1sqqVbizwOkmjbqgdEYINAfSHEzQSmH5YQFUOqFlCjQ2CbSYCe3EAqX4ctbVPnP71BS6fW7N5F1Mzx89R6lHkiYuBpvqibYFhr1wGgMkJiE3LS0UNoqu65eJbVkpar6Jj8/FPfUbdxIoC006gGqRgDDyIsB6oYf7U0jWA/Q3gmU2TDqAcrCj3LdozFAeRhSZsJoDFAWfpTrBgA+VDgQVkJr3QAAAABJRU5ErkJggg=="]
+				"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVRoQ2NkYGD4D8RDFjCOemCA4240Bpor5zMwMILCAQJq2xLwxsmWFbeB8gj1PhEqFMUhxTEw6oHRGKCwHqjMnQ/MAog03TYJfx5YPg2YB5DUR2YOcB4Y9cBoDFCYB/ITgXkAqVyfMB9/HpjZdhtFfVrVAOeBUQ+MxgCJeSA5ogm5KcMgJiJLUT3w8vVDlLZRQZ0TSW0jkttCox5Aq4lHY4DULmV2MjAPIAEJMVmK+gPPXz5EqRdS8mmcB0Y9gNYjG40BUvNAU3IESrlt7bMMqSXEwCAgglqMv3+DUm0wfHiNop2B/2szin6ngjra1gOjHhiNAdQURrApkeJmg5Jo5+w6jGLC3vX/KcoDQamI/jTI4Pn5ichdZoaECcBxJzxg1AOjMUDzJGRvgtLWkRMSQCnYNb0WovD5hFDL/Y9vUcv9j+9Q5RXe1qOk+Ydv3qO0jRJmraYwD4x6YDQGKEtCJDVMBkAxwXpgANxEkpWjHiApuGigeDQGaBCoJBk5GgMkBRcNFI/GAA0ClSQjR2OApOCigWIAChBIEDNFqLEAAAAASUVORK5CYII="]
+				"content":["image", "../../images/creatures.png"]
 			};
 			
 			JixelInstance.am.load(assets, function() {
@@ -71,6 +84,10 @@
 				  this.controlmove(game, time);
 				  this.update_trail(game, time);
 				  this.parent(game, time);
+				  this.wrap_to_window(game);
+				},
+				
+				wrap_to_window: function(game) {
 				},
 				
 				update_trail: function(game, time) {
