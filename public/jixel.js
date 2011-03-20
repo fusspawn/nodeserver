@@ -63,6 +63,11 @@ var Jixel = new Class({
            right:'0px',
            display:'none'
         }).appendTo('body');
+		//FPS Tracking
+		this.avgFPS = 0;
+		this.renderedFrames = 0;
+		this.timeSpent = 0;
+		
         this.ui.pauseMenu = $('<div/>').dialog({
             autoOpen : false,
             title : 'Game Paused',
@@ -258,7 +263,18 @@ var Jixel = new Class({
     update: function(delta) {
         this.doFollow(delta);
         if(this.showFPS) {
-            this.ui.fps.html(Math.floor(1/delta));
+		
+		    this.renderedFrames++;
+		    this.timeSpent += delta;
+			
+			if(this.timeSpent >= 1)
+			{
+				this.avgFPS = this.renderedFrames;
+				this.timeSpent = 0
+				this.renderedFrames = 0;
+			}
+			
+            this.ui.fps.html("Frame Rate (Avg): "+this.avgFPS+ " (Cur): "+Math.floor(1/delta));
         }
         this.audio.update(delta);
         this.state.update(this, delta);
@@ -472,7 +488,7 @@ var JxlObject = new Class({
         return true;
     },
     collide: function(object) {
-        if(object == undefined) this;
+        if(object == undefined) object = this;
         return jxlU.collide(this, object);
     },
     preCollide: function(object) {},
@@ -983,6 +999,7 @@ var JxlSprite = new Class({
                 if(this._caf == this._curAnim.frames.length-1) {
                     if(this._curAnim.looped) this._caf = 0;
                     this.finished = true;
+					this.animationComplete(this._curAnim.name);
                 } else {
                     this._caf++;
                 }
@@ -990,6 +1007,9 @@ var JxlSprite = new Class({
             }
         }
     },
+	animationComplete: function(name) {
+		
+	},
     addAnimation: function(name, frames, frameRate, looped ){
         if(frameRate == undefined)
             frameRate = 0;
@@ -1178,6 +1198,7 @@ var JxlEmitter = new Class({
     setYSpeed: function(Min, Max) {
         Min = ( Min == undefined) ? 0 : Min;
         Max = ( Max == undefined) ? 0 : Max;
+    
         this.minParticleSpeed.y = Min;
         this.maxParticleSpeed.y = Max;
     },
@@ -1243,7 +1264,7 @@ var JxlEmitter = new Class({
         Quantity = ( Quantity == undefined) ? 0 : Quantity;
     
         if(this.members.length <= 0) {
-            console.log("WARNING: there are no sprites loaded in your emitter.\nAdd some to FlxEmitter.members or use FlxEmitter.createSprites().");
+            //FlxG.log("WARNING: there are no sprites loaded in your emitter.\nAdd some to FlxEmitter.members or use FlxEmitter.createSprites().");
             return this;
         }
         this._explode = Explode;
@@ -2685,3 +2706,21 @@ var AssetManager = new Class({
 
 
 var jxlU = new JxlU();
+
+
+// Extensions  
+
+/* 
+
+@name: Number.clamp
+@desc:  Clamp a number between two values.
+
+@usage:   var num = 100;
+			   num.clamp(0, 50) -> 50
+			   num.clamp(0, 200) -> 100
+			   num.clamp(101, 200) -> 101
+*/
+Number.prototype.clamp = function(min, max) {
+		  return Math.min(Math.max(this, min), max);
+}
+		

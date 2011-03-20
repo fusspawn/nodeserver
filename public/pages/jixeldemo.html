@@ -8,7 +8,8 @@
 			margin:0px;        
 			padding:0px;        
 			overflow:hidden;        
-			font-family:'Geo';     
+			font-family:'Geo'; 
+		    color:white;
 		}      
 		.ui-widget {       
 			font-family:'Geo' !important;   
@@ -31,58 +32,73 @@
 		  return Math.min(Math.max(this, min), max);
 		}
 		
+	 
 	 $(function() {
 			var canvas = $("#gamewindow")[0];
 			canvas.getContext("2d");
 			
-			var JixelInstance = new Jixel(canvas);
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
 			
+		    var JixelInstance = new Jixel(canvas);	
 			JixelInstance.changeScale(2);
 			JixelInstance.screenWidth(window.innerWidth);
 			JixelInstance.screenHeight(window.innerHeight);
 			
 			var assets = {
-				"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVRoQ2NkYGD4D8RDFjCOemCA4240Bpor5zMwMILCAQJq2xLwxsmWFbeB8gj1PhEqFMUhxTEw6oHRGKCwHqjMnQ/MAog03TYJfx5YPg2YB5DUR2YOcB4Y9cBoDFCYB/ITgXkAqVyfMB9/HpjZdhtFfVrVAOeBUQ+MxgCJeSA5ogm5KcMgJiJLUT3w8vVDlLZRQZ0TSW0jkttCox5Aq4lHY4DULmV2MjAPIAEJMVmK+gPPXz5EqRdS8mmcB0Y9gNYjG40BUvNAU3IESrlt7bMMqSXEwCAgglqMv3+DUm0wfHiNop2B/2szin6ngjra1gOjHhiNAdQURrApkeJmg5Jo5+w6jGLC3vX/KcoDQamI/jTI4Pn5ichdZoaECcBxJzxg1AOjMUDzJGRvgtLWkRMSQCnYNb0WovD5hFDL/Y9vUcv9j+9Q5RXe1qOk+Ydv3qO0jRJmraYwD4x6YDQGKEtCJDVMBkAxwXpgANxEkpWjHiApuGigeDQGaBCoJBk5GgMkBRcNFI/GAA0ClSQjR2OApOCigWIAChBIEDNFqLEAAAAASUVORK5CYII="]
-				"content":["image", "../../images/creatures.png"]
+				"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVRoQ2NkYGD4D8RDFjCOemCA4240Bpor5zMwMILCAQJq2xLwxsmWFbeB8gj1PhEqFMUhxTEw6oHRGKCwHqjMnQ/MAog03TYJfx5YPg2YB5DUR2YOcB4Y9cBoDFCYB/ITgXkAqVyfMB9/HpjZdhtFfVrVAOeBUQ+MxgCJeSA5ogm5KcMgJiJLUT3w8vVDlLZRQZ0TSW0jkttCox5Aq4lHY4DULmV2MjAPIAEJMVmK+gPPXz5EqRdS8mmcB0Y9gNYjG40BUvNAU3IESrlt7bMMqSXEwCAgglqMv3+DUm0wfHiNop2B/2szin6ngjra1gOjHhiNAdQURrApkeJmg5Jo5+w6jGLC3vX/KcoDQamI/jTI4Pn5ichdZoaECcBxJzxg1AOjMUDzJGRvgtLWkRMSQCnYNb0WovD5hFDL/Y9vUcv9j+9Q5RXe1qOk+Ydv3qO0jRJmraYwD4x6YDQGKEtCJDVMBkAxwXpgANxEkpWjHiApuGigeDQGaBCoJBk5GgMkBRcNFI/GAA0ClSQjR2OApOCigWIAChBIEDNFqLEAAAAASUVORK5CYII="],
+				"explosions":["image", "../../images/explosions.png"],
+				"ships":["image", "../../images/ships.png"]
 			};
 			
 			JixelInstance.am.load(assets, function() {
-				var player = new ShipController(JixelInstance.am.get("ship"), 50, 50);
+				var player = new ShipController(JixelInstance.am.get("ships"), 50, 50);
 				JixelInstance.state.add(player);
-				//JixelInstance.follow(player);
 				JixelInstance.start();
 				JixelInstance.showFPS();
 			});
 			
 			
 			
+			var Explosion = new Class({
+				Extends: JxlSprite,
+				initialize: function(graphic, x, y, target, length) {
+					this.parent(graphic, x, y, 64, 64);
+					this.addAnimation("blueboom", [0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], .05, false);
+				},
+				
+				explode: function(callback) {
+					this.play("blueboom");
+					this.animcallback = callback;
+				},
+				
+				animationComplete: function(name, isLooped) {
+					this.dead = true;
+					this.animcallback();
+				},
+			});
+			
 			
 			var ShipController = new Class({
 				Extends: JxlSprite,
 				initialize: function(graphic, x, y) {
-					  this.parent(graphic, x, y);
+					  this.parent(graphic, x, y, 36, 36);
 					  this.rotatespeed = 10;
 					  this.movespeed = 0;
 					  this.angle = 90;
 					  this.maxspeed = 1.2;
-					  this.trail = new JxlEmitter(this.x, this.y);
 					  this.forward = {};
 					  this.forward.x = this.x;
 					  this.forward.y = this.y;
-					  this.max_trail_particles = 50;
-					  this.drag = new JxlPoint(150,150);
-					  
-					  for(i = 0; i < this.max_trail_particles; i++)
-					  {
-							var particle = new JxlParticle(1);
-							particle.createGraphic(4, 4, Math.floor(Math.random() * 0xFFFFFFFF));
-							this.trail.add(particle);
-					  }
+					  this.drag = new JxlPoint(50, 50);
+					  this.exploading = false;
+					  this.addAnimation("default_skin", [41],  0.05, true); // We only need a single frame.
+					  this.play("default_skin"); // This should set our image to the single frame. 
+					  console.log("Playing: "+ this._curAnim.name); // just to check it is the correct animation.
 				},
 				
 				update: function(game, time) {
 				  this.controlmove(game, time);
-				  this.update_trail(game, time);
 				  this.parent(game, time);
 				  this.wrap_to_window(game);
 				},
@@ -90,12 +106,15 @@
 				wrap_to_window: function(game) {
 				},
 				
-				update_trail: function(game, time) {
-					this.trail.at(this);
-					var xspeed = (-1 * this.forward.x) * 10;
-					var yspeed = (-1 * this.forward.y) * 10;
-					this.trail.setXSpeed(xspeed, xspeed);
-					this.trail.setYSpeed(yspeed, yspeed);
+				on_death: function(game) {
+					var DeathAnim = new Explosion(JixelInstance.am.get("explosions"), this.x, this.y, 2000);
+					JixelInstance.state.add(DeathAnim);
+					this.exploading = true;
+					
+					var ship = this; // fucking context switches.
+					DeathAnim.explode(function() {
+							ship.exploading = false;
+					});
 				},
 				
 				controlmove: function(game, time) {
@@ -110,20 +129,22 @@
 					}
 					if("W" in game.keys) {
 						this.movespeed = 1;
-						this.trail.start(false, 0, 5);
 					}
 					if("S" in game.keys) {
 					    this.movespeed =  -1;
-						this.trail.start(false, 0, 5);
+					}
+					
+					if("SPACE" in game.keys) {
+						if(!this.exploading)
+							this.on_death();
 					}
 					
 					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
 					this.velocity.x.clamp(-1*this.movespeed, this.movespeed);
-					this.velocity.y.clamp(-1*this.movespeed, this.movespeed);
-					
-					this.forward.x  += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
-					this.forward.y  -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
+					this.velocity.y.clamp(-1*this.movespeed, this.movespeed);					
+					this.forward.x  += Math.sin(this.angle * (Math.PI / 180));
+					this.forward.y  -= Math.cos(this.angle * (Math.PI / 180));
 				}
 				
 			});
