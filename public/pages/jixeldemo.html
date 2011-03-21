@@ -11,6 +11,7 @@
 			font-family:'Geo'; 
 		    color:white;
 		}      
+		
 		.ui-widget {       
 			font-family:'Geo' !important;   
 		}      
@@ -64,7 +65,7 @@
 				Extends: JxlSprite,
 				initialize: function(graphic, x, y, target, length) {
 					this.parent(graphic, x, y, 64, 64);
-					this.addAnimation("blueboom", [0, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], .05, false);
+					this.addAnimation("blueboom", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], .05, false);
 				},
 				
 				explode: function(callback) {
@@ -92,7 +93,7 @@
 					  this.forward.y = this.y;
 					  this.drag = new JxlPoint(50, 50);
 					  this.exploading = false;
-					  this.addAnimation("default_skin", [41],  0.05, true); // We only need a single frame.
+					  this.addAnimation("default_skin", [321],  0.05, true); // We only need a single frame.
 					  this.play("default_skin"); // This should set our image to the single frame. 
 					  console.log("Playing: "+ this._curAnim.name); // just to check it is the correct animation.
 				},
@@ -114,6 +115,7 @@
 					var ship = this; // fucking context switches.
 					DeathAnim.explode(function() {
 							ship.exploading = false;
+							JixelInstance.state.remove(DeathAnim);
 					});
 				},
 				
