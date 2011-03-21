@@ -1,0 +1,232 @@
+
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm uninstall duostack
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preuninstall duostack@0.2.1
+npm info preuninstall duostack@0.3.0
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.2.1
+npm info uninstall duostack@0.3.0
+npm info uninstall duostack@0.4.0
+npm info postuninstall duostack@0.2.1
+npm info postuninstall duostack@0.3.0
+npm info predeactivate duostack@0.4.0
+npm info deactivate duostack@0.4.0
+npm info postdeactivate duostack@0.4.0
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.2.1 complete
+npm info uninstall duostack@0.3.0 complete
+npm info uninstall duostack@0.4.0 complete
+npm ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm install duostack
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preinstall duostack@0.4.0
+npm ERR! failed to link bins
+npm ERR! install failed Error: ENOENT, No such file or directory '/usr/local/bin
+/.duostack-console-expect@0.4.0'
+npm info install failed rollback
+npm info uninstall [ 'duostack@0.4.0' ]
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0
+npm info auto-deactive not symlink
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0 complete
+npm info install failed rolled back
+npm ERR! Error: ENOENT, No such file or directory '/usr/local/bin/.duostack-cons
+ole-expect@0.4.0'
+npm ERR! Report this *entire* log at <http://github.com/isaacs/npm/issues>
+npm ERR! or email it to <npm-@googlegroups.com>
+npm ERR! Just tweeting a tiny part of the error will not be helpful.
+npm ERR! System CYGWIN_NT-6.1 1.7.8(0.236/5/3)
+npm ERR! argv { remain: [ 'duostack' ],
+npm ERR! argv   cooked: [ 'install', 'duostack' ],
+npm ERR! argv   original: [ 'install', 'duostack' ] }
+npm not ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ duostack uninstall
+bash: /usr/local/bin/duostack: No such file or directory
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm install duostack
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preinstall duostack@0.4.0
+npm ERR! failed to link bins
+npm ERR! install failed Error: ENOENT, No such file or directory '/usr/local/bin
+/.duostack-console-expect@0.4.0'
+npm info install failed rollback
+npm info uninstall [ 'duostack@0.4.0' ]
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0
+npm info auto-deactive not symlink
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0 complete
+npm info install failed rolled back
+npm ERR! Error: ENOENT, No such file or directory '/usr/local/bin/.duostack-cons
+ole-expect@0.4.0'
+npm ERR! Report this *entire* log at <http://github.com/isaacs/npm/issues>
+npm ERR! or email it to <npm-@googlegroups.com>
+npm ERR! Just tweeting a tiny part of the error will not be helpful.
+npm ERR! System CYGWIN_NT-6.1 1.7.8(0.236/5/3)
+npm ERR! argv { remain: [ 'duostack' ],
+npm ERR! argv   cooked: [ 'install', 'duostack' ],
+npm ERR! argv   original: [ 'install', 'duostack' ] }
+npm not ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm install duostack > install.txt
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preinstall duostack@0.4.0
+npm ERR! failed to link bins
+npm ERR! install failed Error: ENOENT, No such file or directory '/usr/local/bin
+/.duostack-console-expect@0.4.0'
+npm info install failed rollback
+npm info uninstall [ 'duostack@0.4.0' ]
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0
+npm info auto-deactive not symlink
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0 complete
+npm info install failed rolled back
+npm ERR! Error: ENOENT, No such file or directory '/usr/local/bin/.duostack-cons
+ole-expect@0.4.0'
+npm ERR! Report this *entire* log at <http://github.com/isaacs/npm/issues>
+npm ERR! or email it to <npm-@googlegroups.com>
+npm ERR! Just tweeting a tiny part of the error will not be helpful.
+npm ERR! System CYGWIN_NT-6.1 1.7.8(0.236/5/3)
+npm ERR! argv { remain: [ 'duostack' ],
+npm ERR! argv   cooked: [ 'install', 'duostack' ],
+npm ERR! argv   original: [ 'install', 'duostack' ] }
+npm not ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm -v
+0.3.15
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm uninstall duostack
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preuninstall duostack@0.2.1
+npm info preuninstall duostack@0.3.0
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.2.1
+npm info uninstall duostack@0.3.0
+npm info uninstall duostack@0.4.0
+npm info postuninstall duostack@0.2.1
+npm info postuninstall duostack@0.3.0
+npm info predeactivate duostack@0.4.0
+npm info deactivate duostack@0.4.0
+npm info postdeactivate duostack@0.4.0
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.2.1 complete
+npm info uninstall duostack@0.3.0 complete
+npm info uninstall duostack@0.4.0 complete
+npm ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm install duostack
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preinstall duostack@0.4.0
+npm ERR! failed to link bins
+npm ERR! install failed Error: ENOENT, No such file or directory '/usr/local/bin
+/.duostack-console-expect@0.4.0'
+npm info install failed rollback
+npm info uninstall [ 'duostack@0.4.0' ]
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0
+npm info auto-deactive not symlink
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0 complete
+npm info install failed rolled back
+npm ERR! Error: ENOENT, No such file or directory '/usr/local/bin/.duostack-cons
+ole-expect@0.4.0'
+npm ERR! Report this *entire* log at <http://github.com/isaacs/npm/issues>
+npm ERR! or email it to <npm-@googlegroups.com>
+npm ERR! Just tweeting a tiny part of the error will not be helpful.
+npm ERR! System CYGWIN_NT-6.1 1.7.8(0.236/5/3)
+npm ERR! argv { remain: [ 'duostack' ],
+npm ERR! argv   cooked: [ 'install', 'duostack' ],
+npm ERR! argv   original: [ 'install', 'duostack' ] }
+npm not ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ duostack uninstall
+bash: /usr/local/bin/duostack: No such file or directory
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm install duostack
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preinstall duostack@0.4.0
+npm ERR! failed to link bins
+npm ERR! install failed Error: ENOENT, No such file or directory '/usr/local/bin
+/.duostack-console-expect@0.4.0'
+npm info install failed rollback
+npm info uninstall [ 'duostack@0.4.0' ]
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0
+npm info auto-deactive not symlink
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0 complete
+npm info install failed rolled back
+npm ERR! Error: ENOENT, No such file or directory '/usr/local/bin/.duostack-cons
+ole-expect@0.4.0'
+npm ERR! Report this *entire* log at <http://github.com/isaacs/npm/issues>
+npm ERR! or email it to <npm-@googlegroups.com>
+npm ERR! Just tweeting a tiny part of the error will not be helpful.
+npm ERR! System CYGWIN_NT-6.1 1.7.8(0.236/5/3)
+npm ERR! argv { remain: [ 'duostack' ],
+npm ERR! argv   cooked: [ 'install', 'duostack' ],
+npm ERR! argv   original: [ 'install', 'duostack' ] }
+npm not ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm install duostack > install.txt
+npm info it worked if it ends with ok
+npm info using npm@0.3.15
+npm info using node@v0.4.1
+npm info preinstall duostack@0.4.0
+npm ERR! failed to link bins
+npm ERR! install failed Error: ENOENT, No such file or directory '/usr/local/bin
+/.duostack-console-expect@0.4.0'
+npm info install failed rollback
+npm info uninstall [ 'duostack@0.4.0' ]
+npm info preuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0
+npm info auto-deactive not symlink
+npm info postuninstall duostack@0.4.0
+npm info uninstall duostack@0.4.0 complete
+npm info install failed rolled back
+npm ERR! Error: ENOENT, No such file or directory '/usr/local/bin/.duostack-cons
+ole-expect@0.4.0'
+npm ERR! Report this *entire* log at <http://github.com/isaacs/npm/issues>
+npm ERR! or email it to <npm-@googlegroups.com>
+npm ERR! Just tweeting a tiny part of the error will not be helpful.
+npm ERR! System CYGWIN_NT-6.1 1.7.8(0.236/5/3)
+npm ERR! argv { remain: [ 'duostack' ],
+npm ERR! argv   cooked: [ 'install', 'duostack' ],
+npm ERR! argv   original: [ 'install', 'duostack' ] }
+npm not ok
+
+Fusspawn@Fusspawn-PC ~/nodeserver
+$ npm -v
+0.3.15

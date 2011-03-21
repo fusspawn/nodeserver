@@ -10,7 +10,7 @@ GLOBAL.DEBUG = true;
 /**
  * Module dependencies.
  */
-var express = require('tfe-express');
+var express = require('express');
 var app = express.createServer();
 var io =  require('socket.io'); 
 var sys = require("sys");
@@ -19,7 +19,7 @@ var mongoose = require("mongoose");
 var duodb = process.env['DUOSTACK_DB_MONGODB'];
 var localhost = "mongodb://localhost/test";
 
-var db = mongoose.connect(localhost);
+var db = mongoose.connect(duodb);
 var Player = require("./libs/Player.js").player;
 
 // GAMES DATA
@@ -38,12 +38,12 @@ function get_connected_player(socket) {
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  app.use(express.bodyDecoder());
-  app.use(express.methodOverride());
-  app.use(express.cookieDecoder()); 
-  app.use(express.session({ secret: 'gtfomysession' }));
+  //app.use(express.bodyDecoder());
+  //app.use(express.methodOverride());
+  //app.use(express.cookieDecoder()); 
+  //app.use(express.session({ secret: 'gtfomysession' }));
   app.use(app.router);
-  app.use(express.staticProvider(__dirname + '/public'));
+  app.use(express.static(__dirname + '/public'));
 });
 
 app.configure('development', function(){

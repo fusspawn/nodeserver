@@ -36,24 +36,25 @@
 	 
 	 $(function() {
 			var canvas = $("#gamewindow")[0];
-			canvas.getContext("2d");
-			
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
-			
+			canvas.getContext("2d");			
 		    var JixelInstance = new Jixel(canvas);	
-			JixelInstance.changeScale(2);
-			JixelInstance.screenWidth(window.innerWidth);
-			JixelInstance.screenHeight(window.innerHeight);
 			
 			var assets = {
 				"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVRoQ2NkYGD4D8RDFjCOemCA4240Bpor5zMwMILCAQJq2xLwxsmWFbeB8gj1PhEqFMUhxTEw6oHRGKCwHqjMnQ/MAog03TYJfx5YPg2YB5DUR2YOcB4Y9cBoDFCYB/ITgXkAqVyfMB9/HpjZdhtFfVrVAOeBUQ+MxgCJeSA5ogm5KcMgJiJLUT3w8vVDlLZRQZ0TSW0jkttCox5Aq4lHY4DULmV2MjAPIAEJMVmK+gPPXz5EqRdS8mmcB0Y9gNYjG40BUvNAU3IESrlt7bMMqSXEwCAgglqMv3+DUm0wfHiNop2B/2szin6ngjra1gOjHhiNAdQURrApkeJmg5Jo5+w6jGLC3vX/KcoDQamI/jTI4Pn5ichdZoaECcBxJzxg1AOjMUDzJGRvgtLWkRMSQCnYNb0WovD5hFDL/Y9vUcv9j+9Q5RXe1qOk+Ydv3qO0jRJmraYwD4x6YDQGKEtCJDVMBkAxwXpgANxEkpWjHiApuGigeDQGaBCoJBk5GgMkBRcNFI/GAA0ClSQjR2OApOCigWIAChBIEDNFqLEAAAAASUVORK5CYII="],
 				"explosions":["image", "../../images/Explosions.png"],
-				"ships":["image", "../../images/ships.png"]
+				"ships":["image", "../../images/ships.png"],
+				"button":["image", "../../images/button.jpg"],
 			};
 			
 			JixelInstance.am.load(assets, function() {
 				var player = new ShipController(JixelInstance.am.get("ships"), 50, 50);
+				var SomeButton = new JxlButton(10, 10, function() {
+					alert("Some Body clicked me!");
+				});
+				
+				SomeButton.loadGraphic(JixelInstance.am.get("button"), null);
+				
+				JixelInstance.state.add(SomeButton);
 				JixelInstance.state.add(player);
 				JixelInstance.start();
 				JixelInstance.showFPS();
@@ -95,7 +96,6 @@
 					  this.exploading = false;
 					  this.addAnimation("default_skin", [321],  0.05, true); // We only need a single frame.
 					  this.play("default_skin"); // This should set our image to the single frame. 
-					  console.log("Playing: "+ this._curAnim.name); // just to check it is the correct animation.
 				},
 				
 				update: function(game, time) {
