@@ -31,11 +31,10 @@
 </html>
 
 <script type="text/javascript">	 
-	 $(function() {
-			var canvas = $("#gamewindow")[0];
+	 var canvas = $("#gamewindow")[0];
 			canvas.getContext("2d");			
-		    var JixelInstance = new Jixel(canvas);	
-			
+     JixelInstance = new Jixel(canvas);		
+	 $(function() {			
 			var assets = {
 			    "explosions":["image", "../../images/Explosions.png"],
 				"ships":["image", "../../images/ships.png"],
