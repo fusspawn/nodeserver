@@ -22,26 +22,22 @@
         <script type="text/javascript" src="../../js/jquery-ui.js"></script>
         <script type="text/javascript" src="../../js/mootools-min.js"></script>
 		<script type="text/javascript" src="../../jixel.js"></script>
+        <script type="text/javascript" src="../../js/ShipController.js"></script>
+        <script type="text/javascript" src="../../js/Explosion.js"></script>
 	</head>
 	<body>
 		<canvas id="gamewindow"> No Canvas Support in your browser, go try chrome. </canvas>
 	</body>
 </html>
 
-<script type="text/javascript">
-		Number.prototype.clamp = function(min, max) {
-		  return Math.min(Math.max(this, min), max);
-		}
-		
-	 
+<script type="text/javascript">	 
 	 $(function() {
 			var canvas = $("#gamewindow")[0];
 			canvas.getContext("2d");			
 		    var JixelInstance = new Jixel(canvas);	
 			
 			var assets = {
-				//"ship":["image", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVRoQ2NkYGD4D8RDFjCOemCA4240Bpor5zMwMILCAQJq2xLwxsmWFbeB8gj1PhEqFMUhxTEw6oHRGKCwHqjMnQ/MAog03TYJfx5YPg2YB5DUR2YOcB4Y9cBoDFCYB/ITgXkAqVyfMB9/HpjZdhtFfVrVAOeBUQ+MxgCJeSA5ogm5KcMgJiJLUT3w8vVDlLZRQZ0TSW0jkttCox5Aq4lHY4DULmV2MjAPIAEJMVmK+gPPXz5EqRdS8mmcB0Y9gNYjG40BUvNAU3IESrlt7bMMqSXEwCAgglqMv3+DUm0wfHiNop2B/2szin6ngjra1gOjHhiNAdQURrApkeJmg5Jo5+w6jGLC3vX/KcoDQamI/jTI4Pn5ichdZoaECcBxJzxg1AOjMUDzJGRvgtLWkRMSQCnYNb0WovD5hFDL/Y9vUcv9j+9Q5RXe1qOk+Ydv3qO0jRJmraYwD4x6YDQGKEtCJDVMBkAxwXpgANxEkpWjHiApuGigeDQGaBCoJBk5GgMkBRcNFI/GAA0ClSQjR2OApOCigWIAChBIEDNFqLEAAAAASUVORK5CYII="],
-				"explosions":["image", "../../images/Explosions.png"],
+			    "explosions":["image", "../../images/Explosions.png"],
 				"ships":["image", "../../images/ships.png"],
 				"button":["image", "../../images/button.jpg"],
 			};
@@ -55,101 +51,9 @@
 				
 				SomeButton.loadGraphic(JixelInstance.am.get("button"), null);
 				JixelInstance.state.add(SomeButton);
-				
-				
-				//JixelInstance.state.add(player);
+				JixelInstance.state.add(player);
 				JixelInstance.start();
 				JixelInstance.showFPS();
-			});
-			
-			
-			
-			var Explosion = new Class({
-				Extends: JxlSprite,
-				initialize: function(graphic, x, y, target, length) {
-					this.parent(graphic, x, y, 64, 64);
-					this.addAnimation("blueboom", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31], .05, false);
-				},
-				
-				explode: function(callback) {
-					this.play("blueboom");
-					this.animcallback = callback;
-				},
-				
-				animationComplete: function(name, isLooped) {
-					this.dead = true;
-					this.animcallback();
-				},
-			});
-			
-			var ShipController = new Class({
-				Extends: JxlSprite,
-				initialize: function(graphic, x, y) {
-					  this.parent(graphic, x, y, 36, 36);
-					  this.rotatespeed = 10;
-					  this.movespeed = 0;
-					  this.angle = 90;
-					  this.maxspeed = 1.2;
-					  this.forward = {};
-					  this.forward.x = this.x;
-					  this.forward.y = this.y;
-					  this.drag = new JxlPoint(50, 50);
-					  this.exploading = false;
-					  this.addAnimation("default_skin", [321],  0.05, true); // We only need a single frame.
-					  this.play("default_skin"); // This should set our image to the single frame. 
-				},
-				
-				update: function(game, time) {
-				  this.controlmove(game, time);
-				  this.parent(game, time);
-				  this.wrap_to_window(game);
-				},
-				
-				wrap_to_window: function(game) {
-				},
-				
-				on_death: function(game) {
-					var DeathAnim = new Explosion(JixelInstance.am.get("explosions"), this.x, this.y, 2000);
-					JixelInstance.state.add(DeathAnim);
-					this.exploading = true;
-					
-					var ship = this; // fucking context switches.
-					DeathAnim.explode(function() {
-							ship.exploading = false;
-							JixelInstance.state.remove(DeathAnim);
-					});
-				},
-				
-				controlmove: function(game, time) {
-					this.movespeed = 0;
-					if("A" in game.keys) {
-						this.angle += -1*this.rotatespeed;
-						this.angle.clamp(0, 360);
-					}
-					if("D" in game.keys) {
-						this.angle += this.rotatespeed;
-						this.angle.clamp(0, 360);
-					}
-					if("W" in game.keys) {
-						this.movespeed = 1;
-					}
-					if("S" in game.keys) {
-					    this.movespeed =  -1;
-					}
-					
-					if("SPACE" in game.keys) {
-						if(!this.exploading)
-							this.on_death();
-					}
-					
-					this.velocity.x += Math.sin(this.angle * (Math.PI / 180)) * (this.movespeed / time);
-					this.velocity.y -= Math.cos(this.angle * (Math.PI / 180)) * (this.movespeed / time);
-					this.velocity.x.clamp(-1*this.movespeed, this.movespeed);
-					this.velocity.y.clamp(-1*this.movespeed, this.movespeed);					
-					this.forward.x  += Math.sin(this.angle * (Math.PI / 180));
-					this.forward.y  -= Math.cos(this.angle * (Math.PI / 180));
-				}
-				
 			});
 	});
 </script>

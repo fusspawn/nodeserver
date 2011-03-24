@@ -38,10 +38,6 @@ function get_connected_player(socket) {
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
-  //app.use(express.bodyDecoder());
-  //app.use(express.methodOverride());
-  //app.use(express.cookieDecoder()); 
-  //app.use(express.session({ secret: 'gtfomysession' }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -51,7 +47,7 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler()); 
+  app.use(express.errorHandler({dumpExceptions: true, showStack: true})); 
 });
 
 // Routes
@@ -70,7 +66,7 @@ app.get("/ships", function(req,res) {
 		
 		res.render("ships.ejs", {
 			locals: {
-				count: "over 9000",
+				count: count,
 			},
 			layout: false
 		});
